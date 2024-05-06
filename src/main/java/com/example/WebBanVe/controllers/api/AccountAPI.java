@@ -16,7 +16,8 @@ import com.example.WebBanVe.service.interf.IAccountService;
 
 @RestController
 @RequestMapping("/api")
-public class AccountAPI {
+public class AccountAPI 
+{
 	@Autowired
 	private IAccountService service;
 	@GetMapping("/account")
@@ -42,5 +43,4 @@ public class AccountAPI {
 
 		return ResponseEntity.ok(service.delete(id));
 	}
-		
 }
