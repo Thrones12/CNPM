@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="~{admin/fragments/head :: head}"></head>
+
+<!--begin::Body-->
+
+<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled">
+	<script>var defaultThemeMode = "light"; var themeMode; if (document.documentElement) {if (document.documentElement.hasAttribute("data-bs-theme-mode")) {themeMode = document.documentElement.getAttribute("data-bs-theme-mode");} else {if (localStorage.getItem("data-bs-theme") !== null) {themeMode = localStorage.getItem("data-bs-theme");} else {themeMode = defaultThemeMode;} } if (themeMode === "system") {themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";} document.documentElement.setAttribute("data-bs-theme", themeMode);}</script>
+
+	<div class="d-flex flex-column flex-root">
+		<div class="page d-flex flex-row flex-column-fluid">
+			<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+
+				<header th:replace="~{admin/fragments/header :: header}"></header>
+
+				<div layout:fragment="content"></div>
+
+				<footer th:replace="~{admin/fragments/footer :: footer}"></footer>
+
+			</div>
+		</div>
+	</div>
+
+	<!--begin::Javascript-->
+	<script>var hostUrl = "assets/";</script>
+	<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+	<script src="assets/plugins/global/plugins.bundle.js"></script>
+	<script src="assets/js/scripts.bundle.js"></script>
+	<!--end::Global Javascript Bundle-->
+	<!--begin::Vendors Javascript(used for this page only)-->
+	<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+	<!--end::Vendors Javascript-->
+	<!--begin::Custom Javascript(used for this page only)-->
+	<script src="assets/js/custom/apps/customers/list/export.js"></script>
+	<script src="assets/js/custom/apps/customers/list/list.js"></script>
+	<script src="assets/js/custom/apps/customers/add.js"></script>
+	<script src="assets/js/widgets.bundle.js"></script>
+	<script src="assets/js/custom/widgets.js"></script>
+	<script src="assets/js/custom/apps/chat/chat.js"></script>
+	<script src="assets/js/custom/utilities/modals/create-app.js"></script>
+	<script src="assets/js/custom/utilities/modals/users-search.js"></script>
+	<!--end::Custom Javascript-->
+	<!--end::Javascript-->
+</body>
+
+</html>
