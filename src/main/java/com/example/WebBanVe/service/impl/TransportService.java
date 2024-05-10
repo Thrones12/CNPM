@@ -16,7 +16,8 @@ public class TransportService implements ITransportService
 	private TransportRepository repo; 
 
 	@Override
-	public List<Transport> getAll() {
+	public List<Transport> getAll() 
+	{
 		return repo.findAll();
 	}
 

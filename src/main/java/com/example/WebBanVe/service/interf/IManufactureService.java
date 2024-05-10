@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 import com.example.WebBanVe.entity.Manufacture;
 
 @Component
-public interface IManufactureService 
-{
+public interface IManufactureService {
 	List<Manufacture> getAll();
 	Manufacture getOne(Long id);
     boolean insert(Manufacture manufacture);

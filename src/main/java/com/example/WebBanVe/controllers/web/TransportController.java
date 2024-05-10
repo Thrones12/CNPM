@@ -27,7 +27,8 @@ public class TransportController {
     
 
     @GetMapping("/transport")
-    public String getAllTransports(Model model) {
+    public String getAllTransports(Model model) 
+    {
         List<Transport> transports = transportService.getAll();
         model.addAttribute("transports", transports);
         return "admin/transports";

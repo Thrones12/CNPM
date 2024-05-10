@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.WebBanVe.entity.Transport;
 
-public interface TransportRepository extends JpaRepository<Transport, Long>{
+public interface TransportRepository extends JpaRepository<Transport, Long>
+{
 
 }

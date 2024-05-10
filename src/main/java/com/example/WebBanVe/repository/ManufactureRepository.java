@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.example.WebBanVe.entity.Manufacture;
 
 @Repository
-public interface ManufactureRepository extends JpaRepository<Manufacture, Long>{
+public interface ManufactureRepository extends JpaRepository<Manufacture, Long>
+{
 
 }

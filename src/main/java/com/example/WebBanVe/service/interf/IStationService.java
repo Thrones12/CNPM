@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
 import com.example.WebBanVe.entity.Station;
 
 @Component
-public interface IStationService {
+public interface IStationService 
+{
 	List<Station> getAll();
     Station getOne(Long id);
     boolean insert(Station station);

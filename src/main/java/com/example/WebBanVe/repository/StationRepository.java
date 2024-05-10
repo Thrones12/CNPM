@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.example.WebBanVe.entity.Station;
 
 @Repository
-public interface StationRepository extends JpaRepository<Station, Long>{
+public interface StationRepository extends JpaRepository<Station, Long>
+{
 
 }

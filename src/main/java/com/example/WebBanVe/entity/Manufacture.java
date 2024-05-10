@@ -33,12 +33,15 @@ public class Manufacture
 	@Column(name = "phone")
 	private String phone;
 	
-	@Column(name = "email")	
+	@Column(name = "email")	 
 	private String email;
 	
 	@OneToMany(mappedBy = "manufacture", cascade = CascadeType.REMOVE)
     private List<Transport> transports;
-
+	
+	public Manufacture() {
+		super();
+	}
 	public Manufacture(Long id, String name, String phone, String email) {
 		super();
 		this.id = id;
@@ -47,9 +50,7 @@ public class Manufacture
 		this.email = email;
 	}
 
-	public Manufacture() {
-		super();
-	}
+	
 
 	public Long getId() {
 		return id;

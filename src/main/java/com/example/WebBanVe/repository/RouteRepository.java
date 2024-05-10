@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.example.WebBanVe.entity.Route;
 
 @Repository
-public interface RouteRepository extends JpaRepository<Route, Long>{
+public interface RouteRepository extends JpaRepository<Route, Long>
+{
 
 }

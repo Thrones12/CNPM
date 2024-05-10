@@ -4,8 +4,7 @@ import java.util.List;
 
 import com.example.WebBanVe.entity.Transport;
 
-public interface ITransportService 
-{
+public interface ITransportService {
 	List<Transport> getAll();
 
 	Transport getOne(Long id);

@@ -1,5 +1,6 @@
 package com.example.WebBanVe.entity;
 
-public enum ETransportType {
+public enum ETransportType 
+{
 	PLANE, TRAIN, COACH;
 }

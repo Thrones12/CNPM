@@ -46,7 +46,8 @@ public class Station {
     @OneToMany(mappedBy = "arrival", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Route> arrivalRoutes;
 
-	public Station() {
+	public Station() 
+	{
 		super();
 	}
 

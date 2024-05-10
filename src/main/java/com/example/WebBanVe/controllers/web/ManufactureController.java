@@ -24,7 +24,8 @@ public class ManufactureController
 	private IManufactureService service;
 	
 	@GetMapping("/manufacture")
-	public String getAll(Model model) {		
+	public String getAll(Model model) 
+	{		
 	    List<Manufacture> MANUFACTURE = service.getAll();
 	    model.addAttribute("MANUFACTURE", MANUFACTURE);
 	    return "admin/manufactures";

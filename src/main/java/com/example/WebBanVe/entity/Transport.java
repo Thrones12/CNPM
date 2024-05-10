@@ -49,7 +49,8 @@ public class Transport
 		STOPWORKING, MAINTENANCE, PREPARETODEPART, MOVING
 	}
 
-	public Transport() {
+	public Transport() 
+	{
 		super();
 	}
 

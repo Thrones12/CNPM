@@ -1,5 +1,9 @@
 package com.example.WebBanVe.controllers.api;
 
+import java.util.List;
+
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,24 +24,29 @@ public class StationAPI
 {
 	@Autowired
 	private IStationService service;
+	
 	@GetMapping("/station")
 	private ResponseEntity<?> getAll(){
 		return ResponseEntity.ok(service.getAll());
 	}
+	
 	@GetMapping("/station/{id}")
 	private ResponseEntity<?> getOne(@PathVariable Long id){
 		return ResponseEntity.ok(service.getOne(id));
 	}
+	
 	@PostMapping("/station")
 	private ResponseEntity<?> insert(@RequestBody Station station){
 		service.insert(station);
 		return ResponseEntity.ok(station);
 	}
+	
 	@PutMapping("/station")
 	private ResponseEntity<?> update(@RequestBody Station station){
 
 		return ResponseEntity.ok(service.update(station));
 	}
+	
 	@DeleteMapping("/station/{id}")
 	private ResponseEntity<?> delete(@PathVariable Long id){
 

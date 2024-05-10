@@ -6,8 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.WebBanVe.entity.Route;
 @Component
-public interface IRouteService 
-{
+public interface IRouteService {
 	List<Route> getAll();
 	Route getOne(Long id);
     boolean insert(Route route);

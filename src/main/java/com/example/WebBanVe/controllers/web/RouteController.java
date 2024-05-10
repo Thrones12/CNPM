@@ -26,7 +26,8 @@ public class RouteController {
     private IStationService stationService;
 
     @GetMapping("/route")
-    public String getAllRoutes(Model model) {
+    public String getAllRoutes(Model model) 
+    {
         List<Route> routes = routeService.getAll();
         model.addAttribute("routes", routes);
         return "admin/routes";
