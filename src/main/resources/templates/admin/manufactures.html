@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách các nhà sản xuất</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Danh sách các nhà sản xuất</h1>
+        <a th:href="@{/admin/manufacture/create}" class="btn btn-primary mb-3">Tạo mới</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>Số điện thoại</th>
+                    <th>Email</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="manufacture : ${MANUFACTURE}">
+                    <td th:text="${manufacture.id}"></td>
+                    <td th:text="${manufacture.name}"></td>
+                    <td th:text="${manufacture.phone}"></td>
+                    <td th:text="${manufacture.email}"></td>
+                    <td>
+                        <a th:href="@{/admin/manufacture/{id}(id=${manufacture.id})}" class="btn btn-primary btn-sm">Xem</a>
+                        <a th:href="@{/admin/manufacture/edit/{id}(id=${manufacture.id})}" class="btn btn-secondary btn-sm">Sửa</a>
+                        <a th:href="@{/admin/manufacture/delete/{id}(id=${manufacture.id})}" class="btn btn-danger btn-sm">Xóa</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

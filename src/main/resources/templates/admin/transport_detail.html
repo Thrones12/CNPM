@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết Transport</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Chi tiết Transport</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${transport.name}"></h5>
+                <p class="card-text">Nhà sản xuất: <span th:text="${transport.manufacture.name}"></span></p>
+                <p class="card-text">Sức chứa: <span th:text="${transport.seatingcapacity}"></span></p>
+                <p class="card-text">Loại: <span th:text="${transport.type.name()}"></span></p>
+                <p class="card-text">Trạng thái: <span th:text="${transport.status.name()}"></span></p>
+            </div>
+        </div>
+        <a th:href="@{/admin/transport}" class="btn btn-primary mt-3">Quay lại</a>
+    </div>
+</body>
+</html>

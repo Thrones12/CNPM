@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách các tuyến đường</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Danh sách các tuyến đường</h1>
+        <a th:href="@{/admin/route/create}" class="btn btn-primary mb-3">Tạo mới</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>Điểm khởi hành</th>
+                    <th>Điểm đến</th>
+                    <th>Thời gian khởi hành</th>
+                    <th>Thời gian đến</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="route : ${routes}">
+                    <td th:text="${route.id}"></td>
+                    <td th:text="${route.name}"></td>
+                    <td th:text="${route.departure.name}"></td>
+                    <td th:text="${route.arrival.name}"></td>
+                    <td th:text="${#temporals.format(route.departureTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:text="${#temporals.format(route.arrivalTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td>
+                        <a th:href="@{/admin/route/{id}(id=${route.id})}" class="btn btn-primary btn-sm">Xem</a>
+                        <a th:href="@{/admin/route/edit/{id}(id=${route.id})}" class="btn btn-secondary btn-sm">Sửa</a>
+                        <a th:href="@{/admin/route/delete/{id}(id=${route.id})}" class="btn btn-danger btn-sm">Xóa</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

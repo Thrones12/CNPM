@@ -3,11 +3,13 @@ package com.example.WebBanVe.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.WebBanVe.entity.Route;
 import com.example.WebBanVe.repository.RouteRepository;
 import com.example.WebBanVe.service.interf.IRouteService;
 
+@Service
 public class RouteService implements IRouteService
 {
 	@Autowired

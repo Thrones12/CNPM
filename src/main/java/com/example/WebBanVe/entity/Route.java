@@ -2,6 +2,8 @@ package com.example.WebBanVe.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.time.LocalDateTime;
+
 import org.joda.time.DateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,8 +43,71 @@ public class Route
 	private Station arrival;
 	
 	@Column(name="departure_time")
-	private DateTime departureTime;
+	private LocalDateTime departureTime;
 	
 	@Column(name="arrival_time")
-	private DateTime arrivalTime;
+	private LocalDateTime arrivalTime;
+
+	public Route(Long id, String name, Station departure, Station arrival, LocalDateTime departureTime,
+			LocalDateTime arrivalTime) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.departure = departure;
+		this.arrival = arrival;
+		this.departureTime = departureTime;
+		this.arrivalTime = arrivalTime;
+	}
+
+	public Route() {
+		super();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Station getDeparture() {
+		return departure;
+	}
+
+	public void setDeparture(Station departure) {
+		this.departure = departure;
+	}
+
+	public Station getArrival() {
+		return arrival;
+	}
+
+	public void setArrival(Station arrival) {
+		this.arrival = arrival;
+	}
+
+	public LocalDateTime getDepartureTime() {
+		return departureTime;
+	}
+
+	public void setDepartureTime(LocalDateTime departureTime) {
+		this.departureTime = departureTime;
+	}
+
+	public LocalDateTime getArrivalTime() {
+		return arrivalTime;
+	}
+
+	public void setArrivalTime(LocalDateTime arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
 }
