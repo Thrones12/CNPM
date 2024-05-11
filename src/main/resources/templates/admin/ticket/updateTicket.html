@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Ticket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form role="form" method="post" th:action="@{/admin/update-ticket}" th:object="${ticket}">
+        <input type="hidden" id="id" name="id" th:value="${ticket.id}">
+        
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price" th:field="*{price}">
+        
+        <label for="passenger">Passenger:</label>			
+        <select id="passenger" name="passenger" th:field="*{passenger}">
+            <option th:each="x : ${passengers}" th:value="${x.id}" th:text="${x.fname}+' '+ ${x.lname}">Passenger Name</option>
+        </select>
+        
+        <label for="route">Route:</label>
+        <select id="route" name="route" th:field="*{route}">
+            <option th:each="x : ${routes}" th:value="${x.id}" th:text="${x.name}"></option>
+        </select>
+        
+        <label for="transport">Transport:</label>
+        <select id="transport" name="transport" th:field="*{transport}">
+            <option th:each="x : ${transports}" th:value="${x.id}" th:text="${x.name}"></option>
+        </select>
+        
+        <label for="ticketClass">Ticket Class:</label>
+        <select id="ticketClass" name="ticketClass" th:field="*{ticketClass}">
+            <option value="ECONOMY">Economy</option>
+            <option value="BUSINESS">Business</option>
+            <option value="FIRST">First</option>
+        </select>
+        
+        <label for="reservationCode">Reservation Code:</label>
+        <input type="text" id="reservationCode" name="reservationCode" th:field="*{reservationCode}">
+        
+        <label for="status">Status:</label>
+        <select id="status" name="status" th:field="*{status}">
+            <option value="STANDING">Standing</option>
+            <option value="EXPIRED">Expired</option>
+            <option value="USED">Used</option>
+            <option value="BOOKED">Booked</option>
+        </select>
+        
+        <button type="submit">Update Ticket</button>
+    </form>
+</body>
+</html>
