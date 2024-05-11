@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout-web.html}">
+
+<body>
+	<div layout:fragment="content">
+		<h1>LOGIN</h1>
+		<form th:action="@{login}" method="post">
+			<input type="text" name="username" value="">
+			<input type="password" name="password" value="">
+			<button type="submit">Đăng nhập</button>
+		</form>
+	</div>
+</body>
+
+</html>
