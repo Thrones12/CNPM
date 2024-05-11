@@ -30,10 +30,14 @@ public class Account {
 	@Column(name = "password")
 	private String password;
 	@Column(name = "status")
-	private eAccountStatus status;
+	private String status;
 	@Column(name = "role")
-	private eRole role;
+	private String role;
 
+	@JsonIgnore
+	@OneToOne(mappedBy="account", cascade = CascadeType.ALL)
+	private User user;
+	
 	public enum eRole {
 		ADMIN, CUSTOMER
 	}

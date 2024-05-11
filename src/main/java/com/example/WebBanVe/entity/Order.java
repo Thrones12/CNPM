@@ -42,10 +42,6 @@ public class Order {
     @Column(name="total_price") 
     private Double totalPrice;
     
-    
-    @OneToMany(mappedBy = "order") 
-    private List<Ticket> tickets;
-    
     @Column(name = "status")
     
     private eStatus status;
