@@ -3,8 +3,11 @@ package com.example.WebBanVe.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.joda.time.DateTime;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,8 +24,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="route")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Route 
 {
 	@Id
@@ -47,7 +48,10 @@ public class Route
 	
 	@Column(name="arrival_time")
 	private LocalDateTime arrivalTime;
-
+	
+	@OneToMany(mappedBy = "route", cascade = CascadeType.ALL, orphanRemoval=true)
+    private List<Ticket> ticket;
+	
 	public Route(Long id, String name, Station departure, Station arrival, LocalDateTime departureTime,
 			LocalDateTime arrivalTime) {
 		super();

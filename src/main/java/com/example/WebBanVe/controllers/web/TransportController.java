@@ -1,5 +1,4 @@
 package com.example.WebBanVe.controllers.web;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.WebBanVe.entity.Manufacture;
 import com.example.WebBanVe.entity.Transport;
 import com.example.WebBanVe.service.interf.ITransportService;
 import com.example.WebBanVe.service.interf.IManufactureService;
@@ -24,7 +24,6 @@ public class TransportController {
     
     @Autowired
     private IManufactureService manufactureService;
-    
 
     @GetMapping("/transport")
     public String getAllTransports(Model model) 
@@ -40,20 +39,6 @@ public class TransportController {
         model.addAttribute("transport", transport);
         return "admin/transport_detail";
     }
-
-    @GetMapping("/transport/create")
-    public String createTransportForm(Model model) {
-    	model.addAttribute("manufactures", manufactureService.getAll());
-        model.addAttribute("transport", new Transport());
-        return "admin/create_transport";
-    }
-
-    @PostMapping("/transport/create")
-    public String createTransport(@ModelAttribute Transport transport, Model model) {
-        transportService.insert(transport);
-        return "redirect:/admin/transport";
-    }
-
     @GetMapping("/transport/edit/{id}")
     public String editTransportForm(@PathVariable Long id, Model model) {
         Transport transport = transportService.getOne(id);
@@ -71,6 +56,18 @@ public class TransportController {
     @GetMapping("/transport/delete/{id}")
     public String deleteTransport(@PathVariable Long id, Model model) {
         transportService.delete(id);
+        return "redirect:/admin/transport";
+    }
+    @GetMapping("/transport/create")
+    public String createTransportForm(Model model) {
+    	model.addAttribute("manufactures", manufactureService.getAll());
+        model.addAttribute("transport", new Transport());
+        return "admin/create_transport";
+    }
+
+    @PostMapping("/transport/create")
+    public String createTransport(@ModelAttribute Transport transport, Model model) {
+        transportService.insert(transport);
         return "redirect:/admin/transport";
     }
 }

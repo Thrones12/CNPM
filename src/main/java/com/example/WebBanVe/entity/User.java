@@ -46,6 +46,7 @@ public class User {
 	private eGender gender;
 	
 	@Column(name="birthdate")
+	
 	private Date birthdate;
 	
 	public enum eGender{
