@@ -1,4 +1,4 @@
-package com.example.WebBanVe.controllers.web;
+package com.example.WebBanVe.controllers.admin;
 
 import java.util.List;
 

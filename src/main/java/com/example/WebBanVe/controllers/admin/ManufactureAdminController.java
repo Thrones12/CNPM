@@ -1,4 +1,4 @@
-package com.example.WebBanVe.controllers.web;
+package com.example.WebBanVe.controllers.admin;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import com.example.WebBanVe.service.interf.IManufactureService;
 
 @Controller
 @RequestMapping("/admin")
-public class ManufactureController 
+public class ManufactureAdminController 
 {
 	@Autowired
 	private IManufactureService service;
@@ -28,20 +28,20 @@ public class ManufactureController
 	{		
 	    List<Manufacture> MANUFACTURE = service.getAll();
 	    model.addAttribute("MANUFACTURE", MANUFACTURE);
-	    return "admin/manufactures";
+	    return "admin/views/manufacture/manufactures";
 	}
 	
 	@GetMapping("/manufacture/{id}")
     public String getOneManufacture(@PathVariable Long id, Model model) {
         Manufacture manufacture = service.getOne(id);
         model.addAttribute("manufacture", manufacture);
-        return "admin/manufacture_detail";
+        return "admin/views/manufacture/manufacture_detail";
     }
     
     @GetMapping("/manufacture/create")
     public String showCreateManufactureForm(Model model) {
         model.addAttribute("manufacture", new Manufacture());
-        return "admin/create_manufacture";
+        return "admin/views/manufacture/create_manufacture";
     }
     
     @PostMapping("/manufacture/create")
@@ -54,7 +54,7 @@ public class ManufactureController
     public String showEditManufactureForm(@PathVariable Long id, Model model) {
         Manufacture manufacture = service.getOne(id);
         model.addAttribute("manufacture", manufacture);
-        return "admin/edit_manufacture";
+        return "admin/views/manufacture/edit_manufacture";
     }
     
     @PostMapping("/manufacture/edit")

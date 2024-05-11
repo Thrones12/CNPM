@@ -62,20 +62,12 @@ public class CustomerAdminController {
 		return "redirect:list";
 	}
 
-	@DeleteMapping("admin/customer/delete")
-	public ResponseEntity<String> deleteCustomer(@RequestParam Long id, ModelMap model) {
+	@GetMapping("admin/customer/delete")
+	public String deleteCustomer(@RequestParam Long id, ModelMap model) {
 		if (cusService.delete(id)) {
-			String responseScript = "setTimeout(function() {\r\n" + "		Swal.fire({\r\n"
-					+ "			icon : 'success',\r\n" + "			title : 'Xóa thành công!',\r\n"
-					+ "			showConfirmButton : false,\r\n" + "			timer : 1500\r\n" + "		});\r\n"
-					+ "	}, 500); ";
-			return ResponseEntity.ok(responseScript);
-		} else {
-			String responseScript = "setTimeout(function() {\r\n" + "		Swal.fire({\r\n"
-					+ "			icon : 'error',\r\n" + "			title : 'Thất bại!',\r\n"
-					+ "			showConfirmButton : false,\r\n" + "			timer : 1500\r\n" + "		});\r\n"
-					+ "	}, 500); ";
-			return ResponseEntity.ok(responseScript);
+			return "redirect:list";
 		}
+
+		return "redirect:list";
 	}
 }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tạo mới Transport</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Tạo mới Transport</h1>
+        <form th:action="@{/admin/transport/create}" th:object="${transport}" method="post">
+            <div class="form-group">
+                <label for="name">Tên</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}" required>
+            </div>
+            <div class="form-group">
+			    <label for="manufacture">Nhà sản xuất</label>
+			    <select class="form-control" id="manufacture" th:field="*{manufacture}">
+			        <option th:each="m : ${manufactures}" th:value="${m.id}" th:text="${m.name}"></option>
+			    </select>
+			</div>
+			
+			<div class="form-group">
+			    <label for="seatingcapacity">Sức chứa</label>
+			    <input type="text" class="form-control" id="seatingcapacity" th:field="*{seatingcapacity}" required pattern="[0-9]*" onkeypress="return isNumber(event)" onpaste="return false">
+			    <small id="seatingcapacityError" class="text-danger" style="display: none;">Sức chứa phải lớn hơn 0.</small>
+			</div>
+			
+			<script>
+			    function isNumber(evt) {
+			        evt = (evt) ? evt : window.event;
+			        var charCode = (evt.which) ? evt.which : evt.keyCode;
+			        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+			            return false;
+			        }
+			        return true;
+			    }
+			
+			    document.querySelector('form').addEventListener('submit', function(event) {
+			        var seatingCapacity = document.getElementById('seatingcapacity').value;
+			        if (seatingCapacity == 0) {
+			            document.getElementById('seatingcapacityError').style.display = 'block';
+			            event.preventDefault(); // Ngăn form được gửi đi
+			        } else {
+			            document.getElementById('seatingcapacityError').style.display = 'none';
+			        }
+			    });
+			</script>
+
+			<div class="form-group">
+			    <label for="status">Trạng thái</label>
+			    <select class="form-control" id="status" th:field="*{status}">
+			        <option th:each="transportStatus : ${T(com.example.WebBanVe.entity.Transport.eTransportStatus).values()}"
+			                th:value="${transportStatus}"
+			                th:text="${transportStatus.name()}">
+			        </option>
+			    </select>
+			</div>
+
+			<div class="form-group">
+			    <label for="type">Loại</label>
+			    <select class="form-control" id="type" th:field="*{type}">
+			        <option th:each="transportType : ${T(com.example.WebBanVe.entity.ETransportType).values()}"
+			                th:value="${transportType}"
+			                th:text="${transportType.name()}">
+			        </option>
+			    </select>
+			</div>
+			
+            <button type="submit" class="btn btn-primary">Tạo mới</button>
+        </form>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

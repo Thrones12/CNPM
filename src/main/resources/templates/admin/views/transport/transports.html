@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách các phương tiện vận chuyển</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Danh sách các phương tiện vận chuyển</h1>
+        
+        <a th:href="@{/admin/transport/create}" class="btn btn-primary mb-3">Tạo mới</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>Nhà sản xuất</th>
+                    <th>Số chỗ ngồi</th>
+                    <th>Loại</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="transport : ${transports}">
+                    <td th:text="${transport.id}"></td>
+                    <td th:text="${transport.name}"></td>
+                    <td th:text="${transport.manufacture.name}"></td>
+                    <td th:text="${transport.seatingcapacity}"></td>
+                    <td th:text="${transport.type}"></td>
+					<td th:text="${transport.status}"></td>
+                    <td>
+                        <a th:href="@{/admin/transport/{id}(id=${transport.id})}" class="btn btn-primary btn-sm">Xem</a>
+                        <a th:href="@{/admin/transport/edit/{id}(id=${transport.id})}" class="btn btn-secondary btn-sm">Sửa</a>
+                        <a th:href="@{/admin/transport/delete/{id}(id=${transport.id})}" class="btn btn-danger btn-sm">Xóa</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
