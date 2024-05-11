@@ -2,12 +2,16 @@ package com.example.WebBanVe.entity;
 
 import java.sql.Date;
 
+import com.example.WebBanVe.Enumeration.eGender;
+
 import groovy.transform.builder.Builder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,6 +24,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+//Phong
 @Entity
 @Table(name="user")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -46,7 +51,8 @@ public class User {
 	private String address;
 
 	@Column(name="gender")
-	private String gender;
+	@Enumerated(EnumType.STRING)
+	private eGender gender;
 
 	@Column(name="birthdate")
 	private Date birthdate;
@@ -55,8 +61,4 @@ public class User {
 	@JoinColumn(name="account_id", referencedColumnName = "id")
 	private Account account;
 
-	public enum eGender {
-		MALE,
-		FEMALE
-	}
 }

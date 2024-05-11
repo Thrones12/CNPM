@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+//Phong
 @Entity
 @DiscriminatorValue("CUSTOMER")
 @Table(name="customer")

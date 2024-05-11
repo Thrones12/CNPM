@@ -1,6 +1,6 @@
 package com.example.WebBanVe.entity;
 
-import com.example.WebBanVe.entity.Account.eAccountStatus;
+import com.example.WebBanVe.Enumeration.eTransportType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -14,10 +14,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+// Lâm
 @Entity
 @Table(name = "transport")
 @Data
@@ -40,7 +39,7 @@ public class Transport
 	private int seatingcapacity;
 	
 	@Enumerated(EnumType.ORDINAL)
-    private ETransportType type;
+    private eTransportType type;
 	
 	@Column(name = "status")
 	private eTransportStatus status;
@@ -48,5 +47,4 @@ public class Transport
 	public enum eTransportStatus {
 		STOPWORKING, MAINTENANCE, PREPARETODEPART, MOVING
 	}
-
 }

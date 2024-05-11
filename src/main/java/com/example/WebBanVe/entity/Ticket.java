@@ -1,8 +1,6 @@
 package com.example.WebBanVe.entity;
 import java.util.Date;
 
-import com.example.WebBanVe.entity.Account.eAccountStatus;
-import com.example.WebBanVe.entity.Account.eRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -18,6 +16,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// Kha
 @Entity
 @Table(name = "ticket")
 @Data

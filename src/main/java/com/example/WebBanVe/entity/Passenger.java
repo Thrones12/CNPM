@@ -16,6 +16,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// Kha
 @Entity
 @Table(name = "passenger")
 @Data

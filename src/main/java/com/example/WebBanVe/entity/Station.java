@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.example.WebBanVe.Enumeration.eTransportType;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,6 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// Lâm
 @Entity
 @Table(name = "station")
 @Data
@@ -38,7 +41,7 @@ public class Station {
     private LocalDateTime closingTime;
 
     @Column(name = "type")
-    private ETransportType type;
+    private eTransportType type;
     
     @OneToMany(mappedBy = "departure", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Route> departureRoutes;
