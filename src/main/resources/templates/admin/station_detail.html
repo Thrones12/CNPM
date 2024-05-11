@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết Station</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Chi tiết Station</h1>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${station.name}"></h5>
+                <p class="card-text" th:text="${station.location}"></p>
+                <p class="card-text">Thời gian mở cửa: <span th:text="${#temporals.format(station.openingTime, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+                <p class="card-text">Thời gian đóng cửa: <span th:text="${#temporals.format(station.closingTime, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+                <p class="card-text">Loại: <span th:text="${station.type}"></span></p>
+            </div>
+        </div>
+        <a th:href="@{/admin/station}" class="btn btn-primary mt-3">Quay lại</a>
+    </div>
+</body>
+</html>
