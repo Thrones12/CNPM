@@ -8,23 +8,28 @@
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Chỉnh sửa Transport</h1>
-
-        <form th:action="@{/admin/transport/edit}" th:object="${transport}" method="post">
+		<form th:action="@{/admin/transport/edit}" th:object="${transport}" method="post">
             <input type="hidden" th:field="*{id}">
             <div class="form-group">
                 <label for="name">Tên</label>
                 <input type="text" class="form-control" id="name" th:field="*{name}" required>
             </div>
             
-            <div class="form-group">
-                <label for="manufacture">Nhà sản xuất</label>
-                <select class="form-control" id="manufacture" th:field="*{manufacture}">
-                    <option th:each="m : ${manufactures}" th:value="${m.id}" th:text="${m.name}"></option>
-                </select>
-            </div>
+<div class="form-group">
+    <label for="manufacture">Nhà sản xuất</label>
+    <select class="form-control" id="manufacture.id" th:field="*{manufacture.id}">
+        <option th:each="manufacture : ${manufactures}"
+                th:value="${manufacture.id}"
+                th:text="${manufacture.name}">
+        </option>
+    </select>
+</div>
+
+
+
             <div class="form-group">
                 <label for="seatingcapacity">Sức chứa</label>
-                <input type="text" class="form-control" id="seatingcapacity" th:field="*{seatingcapacity}" required pattern="[0-9]*" onkeypress="return isNumber(event)" onpaste="return false">
+                <input type="text" class="form-control" id="seatingcapacity" th:field="{seatingcapacity}" required pattern="[0-9]" onkeypress="return isNumber(event)" onpaste="return false">
             </div>
             <div class="form-group">
                 <label for="type">Loại</label>
@@ -56,6 +61,7 @@
             </script>
             <button type="submit" class="btn btn-primary">Cập nhật</button>
         </form>
+        
     </div>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
