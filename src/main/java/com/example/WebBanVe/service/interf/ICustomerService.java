@@ -12,10 +12,14 @@ public interface ICustomerService {
 
 	Customer getOne(Long id);
 
+	Customer getByAccountUsername(String username);
+
 	boolean insert(Customer customer);
 
 	boolean update(Customer customer);
 
 	boolean delete(Long id);
+
+	Customer getOne(String email);
 
 }

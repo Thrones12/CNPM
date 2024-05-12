@@ -71,7 +71,7 @@ public class AccountService implements IAccountService {
 	@Override
 	public boolean register(String username, String password, String email) {
 		try {
-			eAccountStatus status = eAccountStatus.ACTIVED;
+			eAccountStatus status = eAccountStatus.INACTIVE;
 			eRole role = eRole.CUSTOMER;
 			new Account();
 			Account account = Account.builder().username(username).password(password).status(status).role(role).build();
@@ -79,6 +79,7 @@ public class AccountService implements IAccountService {
 			
 			Customer customer = new Customer();
 			customer.setAccount(account);
+			customer.setEmail(email);;
 			cusRepo.save(customer);
 			
 			return true;

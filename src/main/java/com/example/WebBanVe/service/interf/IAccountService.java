@@ -12,9 +12,13 @@ public interface IAccountService {
 
 	Account getOne(Long id);
 
+	Account getOne(String username);
+
 	boolean insert(Account account);
 
 	boolean update(Account account);
 
 	boolean delete(Long id);
+
+	boolean register(String username, String password, String email);
 }
