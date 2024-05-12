@@ -17,7 +17,7 @@ public class EmailValidator extends Handler{
 		}
 		if (super.getSuccessor() != null)
 			return super.getSuccessor().validate(service, data);
-		return "";
+		return null;
 	}
 
 }

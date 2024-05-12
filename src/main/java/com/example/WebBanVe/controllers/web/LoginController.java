@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.WebBanVe.Utils.Validator.AccountValidator;
 import com.example.WebBanVe.service.interf.IAccountService;
@@ -26,7 +27,8 @@ public class LoginController {
 	}
 
 	@GetMapping("register")
-	public String getRegister() {
+	public String getRegister(ModelMap model) {
+	    model.addAttribute("message", "Thông báo đăng ký thành công!");
 		return "web/views/login/register";
 	}
 
@@ -50,9 +52,10 @@ public class LoginController {
 			@RequestParam String confirmPassword, ModelMap model) {
 		String message = AccountValidator.getInstance().validate(cusService,
 				new String[] { username, email, password, confirmPassword });
-		if (message != "") {
+		if (message != null) {
+			System.out.println(message);
 			model.addAttribute("message", message);
-			return "redirect:register";
+			return "web/views/login/register";
 		}
 		else {
 			if (accService.register(username, confirmPassword, email)) {
