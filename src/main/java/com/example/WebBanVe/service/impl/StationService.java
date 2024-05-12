@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.WebBanVe.Enumeration.eTransportType;
 import com.example.WebBanVe.entity.Station;
 import com.example.WebBanVe.repository.StationRepository;
 import com.example.WebBanVe.service.interf.IStationService;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class StationService implements IStationService{
@@ -20,6 +23,11 @@ public class StationService implements IStationService{
 		return repo.findAll();
 	}
 
+	@Override
+	@Transactional
+	public List<Station> getByType(eTransportType eType) {
+		return repo.getStationByType(eType.toString());
+	}
 	@Override
 	public Station getOne(Long id) {
 		return repo.findById(id).get();

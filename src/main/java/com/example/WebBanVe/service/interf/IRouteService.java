@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.example.WebBanVe.Enumeration.eTransportType;
 import com.example.WebBanVe.entity.Route;
 
 @Component
 public interface IRouteService {
 	List<Route> getAll();
 	
-	List<Route> search(Long departure_id, Long arrival_id);
+	List<Object[]> search(Long departure_id, Long arrival_id, String start, eTransportType eType);
 
 	Route getOne(Long id);
 

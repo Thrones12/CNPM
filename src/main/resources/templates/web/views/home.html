@@ -19,20 +19,25 @@
 						</div>
 						<!--begin::Heading-->
 						<select name="departure_id">
-            				<option th:each="departure : ${departures}" th:value="${departure.id}" th:text="${departure.name}"></option>
+							<option th:each="departure : ${departures}" th:value="${departure.id}"
+								th:text="${departure.name}"></option>
 						</select>
 						<select name="arrival_id">
-            				<option th:each="arrival : ${arrivals}" th:value="${arrival.id}" th:text="${arrival.name}"></option>
+							<option th:each="arrival : ${arrivals}" th:value="${arrival.id}" th:text="${arrival.name}">
+							</option>
 						</select>
-						<input type="submit" value="Tim Kiem">
+						<label for="departure_time">Chọn ngày khởi hành:</label>
+						<input type="date" id="departure_time" name="departure_time" th:value="${datenow}"><br>
+						<input type="submit" value="Tim Kiếm">
 					</form>
+					
 				</div>
 				<!--end::Search-->
 				<!--begin::Ticket-->
 				<div class="w-lg-500px p-10">
 					<div th:each="route : ${routes}">
-						<p th:text="${route.name}">asd</p>
-						
+						<a th:href="@{home}" th:text="${route[2]} + ' - ' + ${route[3]}"></a>
+
 					</div>
 				</div>
 				<!--end::Ticket-->

@@ -10,6 +10,8 @@ import com.example.WebBanVe.Enumeration.eTransportType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,12 +37,13 @@ public class Station {
     private String location;
     
     @Column(name = "opening_time")
-    private LocalDateTime openingTime;
+    private String openingTime;
 
     @Column(name = "closing_time")
-    private LocalDateTime closingTime;
+    private String closingTime;
 
     @Column(name = "type")
+	@Enumerated(EnumType.STRING)
     private eTransportType type;
     
     @OneToMany(mappedBy = "departure", cascade = CascadeType.REMOVE, orphanRemoval = true)

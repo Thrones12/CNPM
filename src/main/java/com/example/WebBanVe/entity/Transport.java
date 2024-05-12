@@ -38,10 +38,13 @@ public class Transport
 	@Min(1)
 	private int seatingcapacity;
 	
-	@Enumerated(EnumType.ORDINAL)
+	
+	@Column(name="type")
+	@Enumerated(EnumType.STRING)
     private eTransportType type;
 	
 	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
 	private eTransportStatus status;
 	
 	public enum eTransportStatus {

@@ -22,6 +22,7 @@ public class BlogController {
 	public String getBlog(@RequestParam(defaultValue="") String pSelected,
 			@RequestParam(defaultValue="") String dSelected, @RequestParam(defaultValue="") String wSelected,
 			@RequestParam(defaultValue="") String street, ModelMap model) {
+		model.addAttribute("pageName", "blog");
 		List<String> provinces = loService.getProvince();
 		model.addAttribute("provinces", provinces);
 		if (pSelected.isEmpty())

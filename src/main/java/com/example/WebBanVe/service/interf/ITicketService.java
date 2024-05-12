@@ -9,6 +9,8 @@ import com.example.WebBanVe.entity.Ticket;
 @Component
 public interface ITicketService {
 	List<Ticket> getAll();
+	
+	List<Ticket> getByTicket(Long route_id);
 
 	Ticket getOne(Long id);
 

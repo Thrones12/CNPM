@@ -28,3 +28,14 @@ function onDistrictChange() {
             });
         });
 }
+function toggleDateInput() {
+    var checkbox = document.getElementById("showDate");
+    var dateInput = document.getElementById("dateInput");
+
+    // Nếu checkbox được chọn, hiển thị thẻ input date, ngược lại ẩn đi
+    if (checkbox.checked) {
+        dateInput.style.display = "block";
+    } else {
+        dateInput.style.display = "none";
+    }
+}
