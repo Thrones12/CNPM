@@ -22,8 +22,6 @@ public class TicketService implements ITicketService {
     private TicketRepository repo;
     
     @Autowired
-	private IPassengerService passengerService;
-    @Autowired
 	private IRouteService routeService;
 	@Autowired
 	private ITransportService transportService;
@@ -70,22 +68,6 @@ public class TicketService implements ITicketService {
         }
     }
 
-		@Override
-		public Ticket find(Long id, Long pasId, Long transId, Long routeId) {
-		 
-		    Ticket ticket = repo.findById(id).orElse(null);
-		    
-		    // Kiểm tra nếu vé tồn tại và thông tin khớp với các thông tin được cung cấp
-		    if (ticket != null && 
-		        ticket.getPassenger().getId().equals(pasId) &&
-		        ticket.getTransport().getId().equals(transId) &&
-		        ticket.getRoute().getId().equals(routeId)) {
-		        return ticket;
-		    } else {
-		        // Trả về null nếu không tìm thấy vé hoặc thông tin không khớp
-		        return null;
-		    }
-		}
-
+		
 	
 }

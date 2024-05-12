@@ -39,10 +39,6 @@
         
         <label for="price">Price:</label>
         <input type="text" id="price" name="price" th:field="*{price}">
-        <label for="passenger">Passenger:</label>			
-		   <select id="passenger" name="passenger" th:field="*{passenger}">
-		    <option th:each="x : ${passengers}" th:value="${x.id}" th:text="${x.fname}+' '+ ${x.lname} ">Passenger Name</option>
-		</select>
 	<label for="route">Route:</label>
 			<select id="route" name="route" th:field="*{route}">
 			    <option th:each="x : ${routes}" th:value="${x.id}" th:text="${x.name}"></option>

@@ -24,8 +24,7 @@ import com.example.WebBanVe.entity.Ticket;
 public class TicketAdminController {
 	@Autowired
 	private ITicketService ticketService;
-	@Autowired
-	private IPassengerService passengerService;
+	
 	@Autowired
 	private IRouteService routeService;
 	@Autowired
@@ -39,8 +38,6 @@ public class TicketAdminController {
 	
 	@GetMapping("/update-ticket/{id}")
 	public String updateTicket(Model model, @PathVariable("id") Long id) {
-		List<Passenger> listPass= passengerService.getAll();
-		model.addAttribute("passengers",listPass);
 		model.addAttribute("routes",routeService.getAll());
 		model.addAttribute("transports",transportService.getAll());
 		Ticket ticket = ticketService.getOne(id);
@@ -68,8 +65,6 @@ public class TicketAdminController {
 	@GetMapping("/create-ticket")
 	public String addTicket(Model model) {
 		Ticket ticket = new Ticket();
-		List<Passenger> listPass= passengerService.getAll();
-		model.addAttribute("passengers",listPass);
 		model.addAttribute("routes",routeService.getAll());
 		model.addAttribute("transports",transportService.getAll());
 		model.addAttribute("ticket", ticket);

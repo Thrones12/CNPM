@@ -157,7 +157,10 @@
             <th>Order Date</th>
             <th>Total Price</th>
             <th>Status</th>
-            <th>Action</th>
+            <th>Passenger</th>
+            <th>Route</th>
+            <th>Transport</th>
+           
         </tr>
     </thead>
     <tbody class="fw-semibold text-gray-600">
@@ -166,6 +169,9 @@
             <td th:text="${order.orderDate}"></td>
             <td th:text="${order.totalPrice}"></td>
             <td th:text="${order.status}"></td>
+            <td th:text="${order.passenger.fname+' ' +order.passenger.lname}"></td>
+              <td th:text="${order.ticket.route.name}"></td>
+                <td th:text="${order.ticket.transport.name}"></td>
             <td class="text-end">
                 <a th:href="@{/admin/update-order/{id}(id=${order.id})}" class="btn btn-primary">Edit</a>
                 <a th:href="@{'/admin/delete-order/' + ${order.id}}" onclick="return confirm('Do you want to delete it?')" class="btn btn-danger">Delete</a>

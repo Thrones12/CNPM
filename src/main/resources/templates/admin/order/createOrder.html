@@ -14,7 +14,7 @@
             margin-bottom: 5px;
         }
         input {
-            width: 100%;
+            width: 50%;
             padding: 8px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
@@ -50,8 +50,22 @@
             <option value="UNPAID">UNPAID</option>
             <option value="REFUND">REFUND</option>
         </select>
-        
+        <label for="passenger">Passenger:</label>
+			<select id="passenger.id" name="passenger.id" >
+			    <option th:each="passenger : ${passengers}" th:value="${passenger.id}" th:text="${passenger.fname + ' '+passenger.lname}"></option>
+			</select>
+		  <label for="ticket">Ticket:</label>
+			<select id="ticket.id" name="ticket.id" >
+			    <option th:each="ticket : ${tickets}" th:value="${ticket.id}" th:text="${ticket.reservationCode}"></option>
+			</select>
+
         <button type="submit">Create</button>
     </form>
+    <!-- Trong phần HTML -->
+<!-- Thêm kiểm tra và hiển thị thông báo nếu cập nhật không thành công -->
+<div th:if="${updateFailed}">
+    <p style="color: red;">Update failed. Please try again.</p>
+</div>
+
 </body>
 </html>

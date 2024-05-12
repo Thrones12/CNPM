@@ -16,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,11 +46,11 @@ public class Passenger {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "birthDate")
+    @Column(name = "birth_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
-    @OneToMany(mappedBy = "passenger", cascade = CascadeType.ALL, orphanRemoval=true)
-    private List<Ticket> tickets;
+    @OneToOne(mappedBy = "passenger")
+    private Order order;
 
 }

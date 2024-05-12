@@ -154,7 +154,8 @@
     <thead>
         <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
           
-            <th class="min-w-125px">Họ Tên</th>
+            <th class="min-w-125px">Họ</th>
+              <th class="min-w-125px">Tên</th>
             <th class="min-w-125px">CCCD</th>
             <th class="min-w-125px">Email</th>
             <th class="min-w-125px">Số Điện Thoại</th>
@@ -163,8 +164,9 @@
         </tr>
     </thead>
     <tbody class="fw-semibold text-gray-600">
-        <tr th:each="passenger : ${list}">          
-            <td th:text="${passenger.lname + ' ' + passenger.fname}"></td>
+        <tr th:each="passenger : ${list}">      
+			 <td th:text="${passenger.fname}"></td>    
+            <td th:text="${passenger.lname}"></td>
             <td th:text="${passenger.personId}"></td>
             <td th:text="${passenger.email}"></td>
             <td th:text="${passenger.phone}"></td>

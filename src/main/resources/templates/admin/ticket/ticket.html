@@ -155,10 +155,10 @@
         <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
             <th class="min-w-125px">ID</th>
             <th class="min-w-125px">Price</th>
-            <th class="min-w-125px">Passenger ID</th>
+      
             <th class="min-w-125px">Reservation Code</th>
-            <th class="min-w-125px">Route ID</th>
-            <th class="min-w-125px">Transport ID</th>
+            <th class="min-w-125px">Route </th>
+            <th class="min-w-125px">Transport </th>
             <th class="min-w-125px">Status</th>
             <th class="min-w-125px">Ticket Class</th>
             <th class="text-end min-w-70px">Action</th>
@@ -168,10 +168,10 @@
         <tr th:each="ticket : ${list}">          
             <td th:text="${ticket.id}"></td>
             <td th:text="${ticket.price}"></td>
-            <td th:text="${ticket.passenger.id}"></td>
+          
             <td th:text="${ticket.reservationCode}"></td>
-            <td th:text="${ticket.route.id}"></td>
-            <td th:text="${ticket.transport.id}"></td>
+            <td th:text="${ticket.route.name}"></td>
+            <td th:text="${ticket.transport.name}"></td>
             <td th:text="${ticket.status}"></td>
             <td th:text="${ticket.ticketClass}"></td>
             <td class="text-end">

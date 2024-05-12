@@ -16,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
@@ -50,7 +51,8 @@ public class Transport
 	private eTransportStatus status;
 	
 	  @OneToMany(mappedBy = "transport", cascade = CascadeType.ALL, orphanRemoval=true)
-	    private List<Ticket> tickets;
+	  private List<Ticket> ticket;
+
 	public enum eTransportStatus {
 		STOPWORKING, MAINTENANCE, PREPARETODEPART, MOVING
 	}

@@ -14,14 +14,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.WebBanVe.service.interf.ICustomerService;
 import com.example.WebBanVe.service.interf.IOrderService;
-import com.example.WebBanVe.entity.Customer;
+import com.example.WebBanVe.service.interf.IPassengerService;
+import com.example.WebBanVe.service.interf.ITicketService;
+import com.example.WebBanVe.entity.Ticket;
 import com.example.WebBanVe.entity.Order;
+import com.example.WebBanVe.entity.Passenger;
 
 @Controller 
 @RequestMapping("/admin")
 public class OrderAdminControllers {
 	@Autowired
 	private IOrderService orderService;
+	@Autowired
+	private IPassengerService passgengerService;
+	@Autowired
+	private ITicketService ticketService;
+
 
 	@GetMapping("/order")
 	public String order(ModelMap model) {
@@ -31,15 +39,20 @@ public class OrderAdminControllers {
 	}
 	@GetMapping("/update-order/{id}")
 	public String updateOrder(Model model, @PathVariable("id") Long id) {
-		Order order = orderService.getOne(id);
+		Order order = orderService.getOne(id);	
 		model.addAttribute("order", order);
+		 List<Passenger> passengers = passgengerService.getAll();
+		    model.addAttribute("passengers", passengers); 
+		    List<Ticket> tickets = ticketService.getAll();
+		    model.addAttribute("tickets", tickets); 
 		return "admin/order/updateOrder";		
 	}
 	@PostMapping("/update-order")
-	public String updateOrder(@ModelAttribute("order") Order order) {
+	public String updateOrder(@ModelAttribute("order") Order order, Model model) {
 	    if (orderService.update(order)) {
 	        return "redirect:/admin/order";
-	    }	    
+	    }	   
+	    model.addAttribute("Reate Failed", true);
 	    return "redirect:/admin/update-order";
 	}
 	@GetMapping("/delete-order/{id}")
@@ -52,10 +65,15 @@ public class OrderAdminControllers {
 	}
 	@GetMapping("/create-order")
 	public String addOrder(Model model) {
-		Order order = new Order();
-		model.addAttribute("order", order);
-		return "/admin/order/createOrder";
+	    Order order = new Order();
+	    model.addAttribute("order", order);
+	    List<Passenger> passengers = passgengerService.getAll();
+	    model.addAttribute("passengers", passengers); 
+	    List<Ticket> tickets = ticketService.getAll();
+	    model.addAttribute("tickets", tickets); 
+	    return "/admin/order/createOrder";
 	}
+
 	
 	
 	@PostMapping("/create-order")

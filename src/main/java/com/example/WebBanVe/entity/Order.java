@@ -3,6 +3,7 @@ import com.example.WebBanVe.entity.Account.eAccountStatus;
 import com.example.WebBanVe.entity.Account.eRole;
 import com.example.WebBanVe.entity.Ticket.eStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -36,7 +37,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-   
 
     @Column(name="order_date") 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -45,9 +45,16 @@ public class Order {
     @Column(name="total_price") 
     private Double totalPrice;
 
-    @OneToMany(mappedBy = "order")
-    private List<Ticket> tickets;
+    @OneToOne
+    @JoinColumn(name = "ticket_id")
+    private Ticket ticket;
+    
+    
 
+  @OneToOne(cascade=CascadeType.PERSIST)
+  @JoinColumn(name = "passenger_id", referencedColumnName="id")
+  @JsonManagedReference
+  private Passenger passenger;
     
     @Column(name = "status")
 

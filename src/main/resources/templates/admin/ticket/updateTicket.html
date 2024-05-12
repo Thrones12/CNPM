@@ -14,7 +14,7 @@
             margin-bottom: 5px;
         }
         input {
-            width: 100%;
+            width: 50%;
             padding: 8px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
@@ -40,21 +40,17 @@
         
         <label for="price">Price:</label>
         <input type="text" id="price" name="price" th:field="*{price}">
-        
-        <label for="passenger">Passenger:</label>			
-        <select id="passenger" name="passenger" th:field="*{passenger}">
-            <option th:each="x : ${passengers}" th:value="${x.id}" th:text="${x.fname}+' '+ ${x.lname}">Passenger Name</option>
-        </select>
-        
-        <label for="route">Route:</label>
-        <select id="route" name="route" th:field="*{route}">
-            <option th:each="x : ${routes}" th:value="${x.id}" th:text="${x.name}"></option>
-        </select>
+         <label for="route">Route:</label>
+        <select id="route.id" name="route.id" th:field="*{route.id}">
+    <option th:each="x : ${routes}" th:value="${x.id}" th:text="${x.name}"></option>
+</select>
+
         
         <label for="transport">Transport:</label>
-        <select id="transport" name="transport" th:field="*{transport}">
+        <select id="transport.id" name="transport.id" th:field="*{transport.id}">
             <option th:each="x : ${transports}" th:value="${x.id}" th:text="${x.name}"></option>
         </select>
+       
         
         <label for="ticketClass">Ticket Class:</label>
         <select id="ticketClass" name="ticketClass" th:field="*{ticketClass}">

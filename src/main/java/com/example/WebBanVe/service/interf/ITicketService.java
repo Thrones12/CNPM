@@ -17,6 +17,5 @@ public interface ITicketService {
 	boolean update(Ticket ticket);
 
 	boolean delete(Long id);
-	Ticket find(Long id, Long pasId, Long transId, Long routeId);
 
 }

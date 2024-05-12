@@ -16,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -50,7 +51,8 @@ public class Route
 	private LocalDateTime arrivalTime;
 	
 	@OneToMany(mappedBy = "route", cascade = CascadeType.ALL, orphanRemoval=true)
-    private List<Ticket> ticket;
+	  private List<Ticket> ticket;
+
 	
 	public Route(Long id, String name, Station departure, Station arrival, LocalDateTime departureTime,
 			LocalDateTime arrivalTime) {
