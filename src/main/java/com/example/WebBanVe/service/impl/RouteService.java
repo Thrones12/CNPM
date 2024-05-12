@@ -22,6 +22,11 @@ public class RouteService implements IRouteService
 	}
 
 	@Override
+	public List<Route> search(Long departure_id, Long arrival_id) {
+		return repo.findRoute(departure_id, arrival_id);
+	}
+
+	@Override
 	public Route getOne(Long id) {
 		return repo.findById(id).get();
 	}

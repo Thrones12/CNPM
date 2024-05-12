@@ -20,6 +20,11 @@ public class LocationService implements ILocationService {
     }
 
     @Override
+    public List<Location> search(String province, String district, String ward) {
+        return locationRepo.findLocationsByProvinceDistrictAndWard(province, district, ward);
+    }
+
+    @Override
     public Location getOne(Long id) {
         return locationRepo.findById(id).orElse(null); 
     }
@@ -62,5 +67,20 @@ public class LocationService implements ILocationService {
             return false;
         }
     }
+
+	@Override
+	public List<String> getProvince() {
+		return locationRepo.findDistinctProvince();
+	}
+
+	@Override
+	public List<String> getDistrict(String province) {
+		return locationRepo.findDistinctDistrictByProvince(province);
+	}
+
+	@Override
+	public List<String> getWard(String province, String district) {
+		return locationRepo.findWardsByProvinceAndDistrict(province, district);
+	}
 
 }

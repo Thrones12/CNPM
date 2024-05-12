@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.WebBanVe.controllers.api;
 
-import com.example.WebBanVe.entity.Location;
-import com.example.WebBanVe.service.interf.ILocationService;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,14 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author PTC
- */
+import com.example.WebBanVe.entity.Location;
+import com.example.WebBanVe.service.interf.ILocationService;
+
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/api")
 public class LocationAPI {
     @Autowired
@@ -73,4 +68,20 @@ public class LocationAPI {
             return ResponseEntity.notFound().build(); 
         }
     }
+    
+    @GetMapping("/districts")
+    public List<String> getDistrictsByProvince(@RequestParam String province) {
+        List<String> districts = locationService.getDistrict(province);
+        return districts;
+    }
+    
+    @GetMapping("/wards")
+    public List<String> getWardsByDistrict(
+            @RequestParam String province,
+            @RequestParam String district) {
+        List<String> wards = locationService.getWard(province, district);
+        System.out.println(wards);
+        return wards;
+    }
+
 }

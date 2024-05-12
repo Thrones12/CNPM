@@ -10,6 +10,8 @@ import com.example.WebBanVe.entity.Location;
 public interface ILocationService {
 	List<Location> getAll();
 
+	List<Location> search(String province, String district, String ward);
+
 	Location getOne(Long id);
 
 	boolean insert(Location location);
@@ -17,5 +19,11 @@ public interface ILocationService {
 	boolean update(Location location);
 
 	boolean delete(Long id);
+	
+	List<String> getProvince();
+
+	List<String> getDistrict(String province);
+
+	List<String> getWard(String province, String district);
 
 }

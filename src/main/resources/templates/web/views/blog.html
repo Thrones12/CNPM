@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout-web.html}">
+
+<body>
+	<div layout:fragment="content">
+		<!--begin::Container-->
+		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+			<!--begin::Form-->
+			<div class="d-flex flex-center flex-column flex-lg-row-fluid">
+				<!--begin::Search-->
+				<div class="w-lg-500px p-10">
+					<form method="get" th:action="@{blog}">
+						<!--begin::Heading-->
+						<div class="text-center mb-11">
+							<!--begin::Title-->
+							<h1 class="text-gray-900 fw-bolder mb-3">Blog</h1>
+							<!--end::Title-->
+						</div>
+						<!--begin::Heading-->
+						<select id="pSelected" name="pSelected" onchange="onProvinceChange()">
+            				<option th:each="province : ${provinces}" th:selected="${province == pSelected}" th:value="${province}" th:text="${province}"></option>
+						</select>
+						<select id="dSelected" name="dSelected" onchange="onDistrictChange()">
+            				<option th:each="district : ${districts}" th:selected="${province == pSelected}" th:value="${district}" th:text="${district}"></option>
+						</select>
+						<select id="wSelected" name="wSelected">
+            				<option th:each="ward : ${wards}" th:selected="${province == pSelected}" th:value="${ward}" th:text="${ward}"></option>
+						</select>
+						<input type="submit" value="Tim Kiếm">
+					</form>
+				</div>
+				<!--end::Search-->
+				<!--begin::Ticket-->
+				<div class="w-lg-500px p-10">
+					<div th:each="location : ${locations}">
+						<a th:href="'location?id='+${location.id}" th:text="${location.name}"></a>
+						
+					</div>
+				</div>
+				<!--end::Ticket-->
+			</div>
+			<!--end::Form-->
+		</div>
+	</div>
+</body>
+
+</html>

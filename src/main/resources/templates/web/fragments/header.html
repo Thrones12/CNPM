@@ -19,7 +19,7 @@
 					</i>
 				</div>
 				<!--end::Heaeder menu toggle-->
-				<a href="index.html">
+				<a th:href="@{home}">
 					<img alt="Logo" src="assets/media/logos/demo11.svg" class="theme-light-show h-20px h-lg-30px" />
 					<img alt="Logo" src="assets/media/logos/demo11-dark.svg" class="theme-dark-show h-20px h-lg-30px" />
 				</a>
@@ -871,7 +871,7 @@
 					<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
 						class="menu-item here show menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
 						<!--begin:Menu link-->
-						<a class="menu-link active py-3" href="admin/customer/list">
+						<a class="menu-link active py-3" th:href="@{ticket-plane}">
 							<span class="menu-title">Vé máy bay</span>
 						</a>
 						<!--end:Menu link-->
@@ -881,7 +881,7 @@
 					<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
 						class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
 						<!--begin:Menu link-->
-						<a class="menu-link py-3" href="admin/customer/list">
+						<a class="menu-link py-3" th:href="@{ticket-train}">
 							<span class="menu-title">Vé tàu lửa</span>
 						</a>
 						<!--end:Menu link-->
@@ -891,8 +891,18 @@
 					<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
 						class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
 						<!--begin:Menu link-->
-						<a class="menu-link py-3" href="admin/customer/list">
+						<a class="menu-link py-3" th:href="@{ticket-coach}">
 							<span class="menu-title">Vé xe khách</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+					<!--begin:Menu item-->
+					<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
+						class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+						<!--begin:Menu link-->
+						<a class="menu-link py-3" th:href="@{blog}">
+							<span class="menu-title">Blog</span>
 						</a>
 						<!--end:Menu link-->
 					</div>
