@@ -26,7 +26,7 @@ public class StationController
 	{		
 	    List<Station> STATION = service.getAll();
 	    model.addAttribute("STATION", STATION);
-	    return "admin/stations";
+	    return "admin/views/station/stations";
 	}
 
 	@GetMapping("/station/{id}")

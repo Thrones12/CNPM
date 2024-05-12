@@ -26,6 +26,16 @@ public class CustomerService implements ICustomerService{
 	}
 
 	@Override
+	public Customer getOne(String email) {
+		return repo.getByEmail(email);
+	}
+
+	@Override
+	public Customer getByAccountUsername(String username) {
+		return repo.getByAccountUsername(username);
+	}
+
+	@Override
 	public boolean insert(Customer customer) {
 		try {
 			repo.save(customer);

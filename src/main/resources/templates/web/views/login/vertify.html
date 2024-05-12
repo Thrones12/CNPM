@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout-web.html}">
+
+<body>
+	<div layout:fragment="content">
+		<!--begin::Container-->
+		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+			<!--begin::Form-->
+			<div class="d-flex flex-center flex-column flex-lg-row-fluid">
+				<!--begin::Wrapper-->
+				<div class="w-lg-500px p-10">
+					<!--begin::Form-->
+					<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" th:action="${login}"
+						metho="post">
+						<!--begin::Heading-->
+						<div class="text-center mb-11">
+							<!--begin::Title-->
+							<h1 class="text-gray-900 fw-bolder mb-3">Nhập mã OTP đã gửi qua Email</h1>
+							<!--end::Title-->
+						</div>
+						<!--begin::Heading-->
+						<!--begin::Input group=-->
+						<div class="fv-row mb-8">
+							<!--begin::OTP-->
+							<input type="text" name="otp" autocomplete="off"
+								class="form-control bg-transparent" />
+							<!--end::OTP-->
+						</div>
+						<!--begin::Submit button-->
+						<div class="d-grid mb-10">
+							<button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
+								<!--begin::Indicator label-->
+								<span class="indicator-label">Xác nhận</span>
+								<!--end::Indicator label-->
+							</button>
+						</div>
+						<!--end::Submit button-->
+					</form>
+					<!--end::Form-->
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Form-->
+		</div>
+	</div>
+</body>
+
+</html>
