@@ -29,6 +29,11 @@ public class TicketService implements ITicketService {
         return repo.findById(id).orElse(null);
     }
 
+	@Override
+	public Ticket getOne(Long route_id, Long transport_id) {
+		return repo.findTopByRouteIdAndTransportId(route_id, transport_id);
+	}
+
     @Override
     public boolean insert(Ticket ticket) {
         try {

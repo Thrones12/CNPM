@@ -17,7 +17,7 @@ import com.example.WebBanVe.service.interf.IStationService;
 
 @Controller
 @RequestMapping("/")
-public class TicketCoachController {
+public class CoachController {
 
 	@Autowired
 	private IStationService stationService;

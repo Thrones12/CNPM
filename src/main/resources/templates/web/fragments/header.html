@@ -867,12 +867,12 @@
 							<!--end::Menu separator-->
 							<!--begin::Menu item-->
 							<div class="menu-item px-5">
-								<a href="account/overview.html" class="menu-link px-5">Hồ sơ</a>
+								<a th:href="@{profile}" class="menu-link px-5">Hồ sơ</a>
 							</div>
 							<!--end::Menu item-->
 							<!--begin::Menu item-->
 							<div class="menu-item px-5">
-								<a href="account/overview.html" class="menu-link px-5">Lịch sử giao dịch</a>
+								<a th:href="@{order-history}" class="menu-link px-5">Lịch sử giao dịch</a>
 							</div>
 							<!--end::Menu item-->
 							<!--begin::Menu separator-->
@@ -917,32 +917,56 @@
 					id="#kt_header_menu" data-kt-menu="true">
 					<!--begin:Menu item-->
 					<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
-						th:class="${pageName=='plane'? 'menu-item here show menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2' : 'menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2'}">
+						th:class="${pageName=='plane' || pageName=='train' || pageName=='coach' ? 'menu-item here show menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2' : 'menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2'}">
 						<!--begin:Menu link-->
-						<a class="menu-link py-3" th:href="@{ticket-plane}">
-							<span class="menu-title">Vé máy bay</span>
-						</a>
-						<!--end:Menu link-->
-					</div>
-					<!--end:Menu item-->
-					<!--begin:Menu item-->
-					<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
-						th:class="${pageName=='train'? 'menu-item here show menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2' : 'menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2'}">
-						<!--begin:Menu link-->
-						<a class="menu-link py-3" th:href="@{ticket-train}">
-							<span class="menu-title">Vé tàu lửa</span>
-						</a>
-						<!--end:Menu link-->
-					</div>
-					<!--end:Menu item-->
-					<!--begin:Menu item-->
-					<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
-						th:class="${pageName=='coach'? 'menu-item here show menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2' : 'menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2'}">
-						<!--begin:Menu link-->
-						<a class="menu-link py-3" th:href="@{ticket-coach}">
-							<span class="menu-title">Vé xe khách</span>
-						</a>
-						<!--end:Menu link-->
+						<span class="menu-link py-3">
+							<span class="menu-title">Phương tiện di chuyển</span>
+							<span class="menu-arrow d-lg-none"></span>
+						</span>
+
+						<!--begin:Menu sub-->
+						<div
+							class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-250px">
+							<!--begin:Menu item-->
+							<div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+								data-kt-menu-placement="right-start" class="menu-item here show menu-lg-down-accordion">
+								<!--begin:Menu SubItem-->
+								<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+									data-kt-menu-placement="bottom-start"
+									th:class="${pageName=='plane'? 'menu-item here show menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2' : 'menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2'}">
+									<!--begin:Menu link-->
+									<a class="menu-link py-3" th:href="@{ticket-plane}">
+										<span class="menu-title">Vé máy bay</span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								<!--end:Menu SubItem-->
+								<!--begin:Menu SubItem-->
+								<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+									data-kt-menu-placement="bottom-start"
+									th:class="${pageName=='train'? 'menu-item here show menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2' : 'menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2'}">
+									<!--begin:Menu link-->
+									<a class="menu-link py-3" th:href="@{ticket-train}">
+										<span class="menu-title">Vé tàu lửa</span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								<!--end:Menu SubItem-->
+								<!--begin:Menu SubItem-->
+								<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+									data-kt-menu-placement="bottom-start"
+									th:class="${pageName=='coach'? 'menu-item here show menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2' : 'menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2'}">
+									<!--begin:Menu link-->
+									<a class="menu-link py-3" th:href="@{ticket-coach}">
+										<span class="menu-title">Vé xe khách</span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								<!--end:Menu SubItem-->
+							</div>
+							<!--end:Menu item-->
+						</div>
+						<!--end:Menu sub-->
 					</div>
 					<!--end:Menu item-->
 					<!--begin:Menu item-->

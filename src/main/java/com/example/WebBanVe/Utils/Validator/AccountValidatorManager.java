@@ -2,15 +2,15 @@ package com.example.WebBanVe.Utils.Validator;
 
 import com.example.WebBanVe.service.interf.ICustomerService;
 
-public class AccountValidator {
-	private static AccountValidator instance;
+public class AccountValidatorManager {
+	private static AccountValidatorManager instance;
 
-	private AccountValidator() {
+	private AccountValidatorManager() {
 	};
 
-	public static AccountValidator getInstance() {
+	public static AccountValidatorManager getInstance() {
 		if (instance == null)
-			instance = new AccountValidator();
+			instance = new AccountValidatorManager();
 		return instance;
 	}
 

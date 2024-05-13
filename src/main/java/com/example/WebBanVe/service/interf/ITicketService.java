@@ -14,6 +14,8 @@ public interface ITicketService {
 
 	Ticket getOne(Long id);
 
+	Ticket getOne(Long route_id, Long transport_id);
+
 	boolean insert(Ticket ticket);
 
 	boolean update(Ticket ticket);

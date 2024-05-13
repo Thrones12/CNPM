@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.WebBanVe.Enumeration.eAccountStatus;
 import com.example.WebBanVe.Utils.CookieManager;
 import com.example.WebBanVe.Utils.Email;
-import com.example.WebBanVe.Utils.Validator.AccountValidator;
+import com.example.WebBanVe.Utils.Validator.AccountValidatorManager;
 import com.example.WebBanVe.entity.Account;
 import com.example.WebBanVe.entity.Customer;
 import com.example.WebBanVe.service.interf.IAccountService;
@@ -48,7 +48,8 @@ public class LoginController {
 	}
 
 	@GetMapping("vertify")
-	public String getVertify() {
+	public String getVertify(ModelMap model) {
+		model.addAttribute("message", "");
 		return "web/views/login/vertify";
 	}
 
@@ -81,7 +82,7 @@ public class LoginController {
 	@PostMapping("register")
 	public String postRegister(HttpServletResponse response, @RequestParam String username, @RequestParam String email,
 			@RequestParam String password, @RequestParam String confirmPassword, ModelMap model) {
-		String message = AccountValidator.getInstance().validate(cusService,
+		String message = AccountValidatorManager.getInstance().validate(cusService,
 				new String[] { username, email, password, confirmPassword });
 		if (message != null) {
 			model.addAttribute("message", message);
@@ -121,7 +122,7 @@ public class LoginController {
 	}
 
 	@PostMapping("vertify")
-	public String postVertify(HttpServletRequest request, @RequestParam String otp) {
+	public String postVertify(HttpServletRequest request, @RequestParam String otp, ModelMap model) {
 		System.out.println(otp);
 		System.out.println(CookieManager.getCookieValue(request, "otp"));
 		if (otp.equals(CookieManager.getCookieValue(request, "otp"))) {
@@ -131,6 +132,7 @@ public class LoginController {
 			accService.update(account);
 			return "web/views/login/login";
 		}
+		model.addAttribute("message", "Nhập sai OTP!");
 		return "web/views/login/vertify";
 	}
 }

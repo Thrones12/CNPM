@@ -1,6 +1,7 @@
 package com.example.WebBanVe.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -42,5 +43,8 @@ public class Route
 	private Station arrival;
 	
 	@Column(name="departure_time")
-	private LocalDate departureTime;
+	private LocalDateTime departureTime;
+	
+	@Column(name="duration")
+	private LocalTime duration;
 }

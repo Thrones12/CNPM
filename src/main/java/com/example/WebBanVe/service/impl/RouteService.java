@@ -30,7 +30,6 @@ public class RouteService implements IRouteService
 		return repo.findAll();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	@Transactional
 	public List<Object[]> search(Long departure_id, Long arrival_id, String start, eTransportType eType) {
