@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout-web.html}">
+
+<body>
+	<div layout:fragment="content">
+		<!--begin::Container-->
+		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+			<!--begin::Form-->
+			<div class="d-flex flex-center flex-column flex-lg-row-fluid">
+				<!--begin::Heading-->
+				<div class="text-center mb-11">
+					<!--begin::Title-->
+					<h1 class="text-gray-900 fw-bolder mb-3">Lịch Sử Giao Dịch</h1>
+					<!--end::Title-->
+				</div>
+				<!--begin::Heading-->
+			</div>
+			<!--end::Form-->
+		</div>
+
+		<!--begin::Container-->
+		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+			<!--begin::Post-->
+			<div class="content flex-row-fluid" id="kt_content">
+				<!--begin::Row-->
+				<div class="flex-center row g-5 g-xxl-8">
+					<!--begin::Col-->
+					<div class="col-xl-8">
+						<!--begin::Feeds Widget 1-->
+						<div style="padding-bottom: 10px;" th:each="order : ${orders}" class="card mb-5 mb-xxl-8">
+							<!--begin::Body-->
+							<div class="card-body pb-0">
+								<!--begin::Header-->
+								<div class="d-flex align-items-center">
+									<!--begin::User-->
+									<div class="d-flex align-items-center flex-grow-1">
+										<!--begin::Info-->
+										<div class="d-flex flex-column">
+											<p class="text-gray-900 fs-6 fw-bold"
+												th:text="'Mã giao dịch: '+${order.id}"></p>
+										</div>
+										<!--end::Info-->
+									</div>
+									<!--end::User-->
+									<!--begin::Menu-->
+									<div class="my-0">
+										<p class="text-gray-900 fs-6 fw-bold"
+											th:text="'Giá tiền: '+${order.totalPrice}"></p>
+									</div>
+									<!--end::Menu-->
+								</div>
+								<!--end::Header-->
+								<!--begin::Header-->
+								<div class="d-flex align-items-center">
+									<!--begin::User-->
+									<div class="d-flex align-items-center flex-grow-1">
+										<!--begin::Info-->
+										<div class="d-flex flex-column">
+											<p class="text-gray-900 fs-6 fw-bold"
+												th:text="'Loại hình: '+${order.ticket.transport.type}"></p>
+										</div>
+										<!--end::Info-->
+									</div>
+									<!--end::User-->
+									<!--begin::Menu-->
+									<div class="my-0">
+										<p class="text-gray-900 fs-6 fw-bold"
+											th:text="'Tuyến: '+${order.ticket.route.name}"></p>
+									</div>
+									<!--end::Menu-->
+								</div>
+								<!--end::Header-->
+								<!--begin::Header-->
+								<div class="d-flex align-items-center">
+									<!--begin::User-->
+									<div class="d-flex align-items-center flex-grow-1">
+										<!--begin::Info-->
+										<div class="d-flex flex-column">
+											<p class="text-gray-900 fs-6 fw-bold"
+												th:text="'Hành khách: ' + ${order.passenger.lname} + ' ' + ${order.passenger.fname}">
+											</p>
+										</div>
+										<!--end::Info-->
+									</div>
+									<!--end::User-->
+									<!--begin::Menu-->
+									<div class="my-0">
+										<p class="text-gray-900 fs-6 fw-bold" th:text="'Ngày đặt: '+${order.orderDate}">
+										</p>
+									</div>
+									<!--end::Menu-->
+								</div>
+								<!--end::Header-->
+								<div class="separator"></div>
+
+								<!--begin::Header-->
+								<div th:if="${order.status!=null}" class="d-flex align-items-center">
+									<!--begin::User-->
+									<div class="d-flex align-items-center flex-grow-1">
+										<!--begin::Info-->
+										<a th:href="order-detail">Chi tiết</a>
+										<!--end::Info-->
+									</div>
+									<!--end::User-->
+								</div>
+								<!--end::Header-->
+							</div>
+							<!--end::Body-->
+						</div>
+						<!--end::Feeds Widget 1-->
+					</div>
+					<!--end::Col-->
+				</div>
+				<!--end::Row-->
+			</div>
+			<!--end::Post-->
+		</div>
+		<!--end::Container-->
+	</div>
+</body>
+
+</html>

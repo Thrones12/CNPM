@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout-web.html}">
+
+<html>
+
+<body>
+	<div layout:fragment="content">
+
+		<!--begin::Container-->
+		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+			<!--begin::Post-->
+			<div class="content flex-row-fluid" id="kt_content">
+				<!--begin::Form-->
+				<form class="form flex-center row g-5" th:action="profile" method="post" th:object="${user}">
+					<!--begin::Modal header-->
+					<div class="modal-header" id="kt_modal_add_customer_header">
+						<!--begin::Heading-->
+						<div class="d-flex flex-center flex-column flex-lg-row-fluid">
+							<!--begin::Heading-->
+							<div class="text-center mb-11">
+								<!--begin::Title-->
+								<h1 class="text-gray-900 fw-bolder mb-3">Hồ Sơ</h1>
+								<!--end::Title-->
+							</div>
+							<!--begin::Heading-->
+						</div>
+						<!--begin::Heading-->
+					</div>
+					<!--end::Modal header-->
+					<!--begin::Modal body-->
+					<div class="col-xl-8">
+						<!--begin::Scroll-->
+						<div>
+							<!--begin::Message-->
+							<div th:if="${message!=null}">
+								<label class="text-green-500 fw-semibold fs-6" style="color:green;"
+									th:text="${message}"></label>
+							</div>
+							<div th:if="${error!=null}">
+								<label class="text-red-500 fw-semibold fs-6" style="color:red;"
+									th:text="${error}"></label>
+							</div>
+							<!--end::Message-->
+							<input type="hidden" th:field="*{id}" name="id" value="" />
+							<input type="hidden" th:field="*{account.id}" name="account_id" value="" />
+							<input type="hidden" th:field="*{account.username}" name="username" value="" />
+							<input type="hidden" th:field="*{account.password}" name="password" value="" />
+							<input type="hidden" th:field="*{account.status}" name="status" value="" />
+							<input type="hidden" th:field="*{account.role}" name="role" value="" />
+							<!--begin::Name-->
+							<div class="fv-row mb-7">
+								<label class="required fs-6 fw-semibold mb-2">Họ Tên:</label>
+								<input type="text" class="form-control form-control-solid" th:field="*{name}"
+									placeholder="VD: Nguyễn Văn A" name="name" value="" />
+							</div>
+							<!--end::Name-->
+
+							<!--begin::Gender-->
+							<div class="row g-9 mb-7">
+								<div class="col-md-6 fv-row">
+									<label class="required fs-6 fw-semibold mb-2">Giới tính:</label>
+									<input type="text" class="form-control form-control-solid" th:field="*{gender}"
+										placeholder="VD: Nam" name="gender" value="" />
+								</div>
+								<div class="col-md-6 fv-row">
+									<label class="required fs-6 fw-semibold mb-2">Ngày sinh:</label>
+									<input type="date" class="form-control form-control-solid" th:field="*{birthdate}"
+										placeholder="VD: 2024-5-11" name="birthdate" value="" />
+								</div>
+							</div>
+							<!--end::Gender-->
+
+							<!--begin::Email-->
+							<div class="fv-row mb-7">
+								<label class="required fs-6 fw-semibold mb-2">Email:</label>
+								<input type="text" class="form-control form-control-solid" th:field="*{email}"
+									placeholder="VD: customer@gmail.com" name="email" value="" />
+							</div>
+							<!--end::Email-->
+
+							<!--begin::Phone-->
+							<div class="fv-row mb-7">
+								<label class="fs-6 fw-semibold mb-2">Số điện thoại</label>
+								<input type="number" class="form-control form-control-solid" th:field="*{phone}"
+									placeholder="VD: 0123456789" name="phone" />
+							</div>
+							<!--end::Phone-->
+
+							<!--begin::Address-->
+							<div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse"
+								href="#kt_modal_add_customer_billing_info" role="button" aria-expanded="false"
+								aria-controls="kt_customer_view_details">
+								Địa Chỉ
+								<span class="ms-2 rotate-180">
+									<i class="ki-duotone ki-down fs-3"></i>
+								</span>
+							</div>
+
+							<!--begin::Address-->
+							<div class="fv-row mb-7">
+								<label class="required fs-6 fw-semibold mb-2">Địa chỉ:</label>
+								<input type="text" class="form-control form-control-solid" th:field="*{address}"
+									placeholder="VD: cus@123" name="password" value="" />
+							</div>
+							<!--end::Address-->
+							<!--end::Billing form-->
+						</div>
+						<!--end::Scroll-->
+					</div>
+					<!--end::Modal body-->
+					<!--begin::Modal footer-->
+					<div class="modal-footer flex-center">
+						<!--begin::Button-->
+						<button type="reset" class="btn btn-light me-3">Thoát</button>
+						<!--end::Button-->
+						<!--begin::Button-->
+						<button type="submit" class="btn btn-primary">
+							<span class="indicator-label">Cập Nhập</span>
+						</button>
+						<!--end::Button-->
+					</div>
+					<!--end::Modal footer-->
+				</form>
+				<!--end::Form-->
+			</div>
+			<!--end::Post-->
+		</div>
+		<!--end::Container-->
+	</div>
+</body>
+
+</html>
