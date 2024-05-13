@@ -43,10 +43,10 @@ public class Station {
     @Column(name = "type")
     private eTransportType type;
     
-    @OneToMany(mappedBy = "departure", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "departure", cascade = CascadeType.REMOVE)
     private List<Route> departureRoutes;
 
-    @OneToMany(mappedBy = "arrival", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "arrival", cascade = CascadeType.REMOVE)
     private List<Route> arrivalRoutes;
 
 }
