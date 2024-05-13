@@ -19,4 +19,6 @@ public interface IPassengerService {
 
 	boolean delete(Long id);
 	List<Passenger> getNotInOrder();
+
+ List<Passenger> getNotInOrder(Long id) ;
 }

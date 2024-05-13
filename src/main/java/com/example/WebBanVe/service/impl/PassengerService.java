@@ -89,4 +89,31 @@ public class PassengerService implements IPassengerService {
 	    return passengersNotInOrder;
 	}
 
+	@Override
+	public List<Passenger> getNotInOrder(Long id) {
+			Passenger pass= repo.getOne(id);
+		    List<Passenger> allPassengers = repo.findAll();
+		
+		    List<com.example.WebBanVe.entity.Order> allOrders = repoOrder.findAll();
+		    List<Passenger> passengersNotInOrder = new ArrayList<>();
+		  
+		    for (Passenger passenger : allPassengers) {
+		        boolean foundInOrder = false;	
+		        for (com.example.WebBanVe.entity.Order order : allOrders) {
+
+		            if (order.getPassenger().equals(passenger)) {
+		                foundInOrder = true;
+		                break;
+		            }
+		        }
+		        if (!foundInOrder ||  passenger.equals(pass)) {
+		            passengersNotInOrder.add(passenger);
+		        }
+		    }		   
+	
+		    return passengersNotInOrder;	
+	}
+		   
+		
+
  }

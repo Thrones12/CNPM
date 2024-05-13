@@ -58,7 +58,7 @@
             <input type="hidden" id="id" name="id" th:value="${order.id}">
             
             <label for="orderDate">Order Date:</label>
-            <input type="date" id="orderDate" name="orderDate" th:value="${order.orderDate}" required>
+            <input type="date" id="orderDate" name="orderDate"  required>
             
             <label for="totalPrice">Total Price:</label>
             <input type="number" id="totalPrice" name="totalPrice" th:value="${order.totalPrice}" required step="0.1">
@@ -69,7 +69,10 @@
                 <option value="UNPAID" th:selected="${order.status == 'UNPAID'}">UNPAID</option>
                 <option value="REFUND" th:selected="${order.status == 'REFUND'}">REFUND</option>
             </select>
-            
+             <label for="customer">Customer:</label>
+            <select id="customer.id" name="customer.id" >
+                <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}"></option>
+            </select>
             <label for="passenger">Passenger:</label>
             <select id="passenger.id" name="passenger.id" >
                 <option th:each="passenger : ${passengers}" th:value="${passenger.id}" th:text="${passenger.fname + ' '+passenger.lname}"></option>

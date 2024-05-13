@@ -10,6 +10,7 @@ import org.springframework.util.RouteMatcher.Route;
 import com.example.WebBanVe.entity.Passenger;
 import com.example.WebBanVe.entity.Ticket;
 import com.example.WebBanVe.entity.Ticket.eStatus;
+import com.example.WebBanVe.repository.OrderRepository;
 import com.example.WebBanVe.repository.TicketRepository;
 import com.example.WebBanVe.service.interf.IPassengerService;
 import com.example.WebBanVe.service.interf.IRouteService;
@@ -27,6 +28,8 @@ public class TicketService implements ITicketService {
 	private IRouteService routeService;
 	@Autowired
 	private ITransportService transportService;
+	 @Autowired
+	    private OrderRepository repoOrder;
     @Override
     public List<Ticket> getAll() {
         return repo.findAll();
@@ -76,29 +79,44 @@ public class TicketService implements ITicketService {
 
 		List<Ticket> all= repo.findAll();
     	List<Ticket> list=new ArrayList<>();
-    	
-        for (Ticket ticket : all) {
-    
-            if (ticket.getStatus()==  Ticket.eStatus.ACTIVE) {
-    
-                list.add(ticket);
-            }
-        }
+    	 List<com.example.WebBanVe.entity.Order> allOrders = repoOrder.findAll();
+       for (Ticket ticket : all) {
+    	   boolean foundInOrder = false;
+    	    for (com.example.WebBanVe.entity.Order order : allOrders) {
+
+        	if (!ticket.getStatus().equals(Ticket.eStatus.ACTIVE) || order.getTicket().equals(ticket)) {
+        		 foundInOrder = true;
+	                break;
+        	}
+    	    }
+    	    if (!foundInOrder ) {
+	           list.add(ticket);
+	        } 
+       }
+                              
     	return list;
+	
 	}
 
 	@Override
 	public List<Ticket> getAllstatusCr( Ticket ticketCr) {
 		List<Ticket> all= repo.findAll();
     	List<Ticket> list=new ArrayList<>();
-    	
+    	 List<com.example.WebBanVe.entity.Order> allOrders = repoOrder.findAll();
        for (Ticket ticket : all) {
-           
-        	if (ticket.getStatus().equals(Ticket.eStatus.ACTIVE) || ticket.equals(ticketCr)) {
-        	     
-                list.add(ticket);
-            }
-        }
+    	   boolean foundInOrder = false;
+    	    for (com.example.WebBanVe.entity.Order order : allOrders) {
+
+        	if (!ticket.getStatus().equals(Ticket.eStatus.ACTIVE) || order.getTicket().equals(ticket)) {
+        		 foundInOrder = true;
+	                break;
+        	}
+    	    }
+    	    if (!foundInOrder ||  ticket.equals(ticketCr)) {
+	           list.add(ticket);
+	        } 
+       }
+                              
     	return list;
 	
 	}

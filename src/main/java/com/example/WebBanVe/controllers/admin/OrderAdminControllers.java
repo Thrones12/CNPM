@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.WebBanVe.service.interf.ICustomerService;
 import com.example.WebBanVe.service.interf.IOrderService;
@@ -29,11 +30,16 @@ public class OrderAdminControllers {
 	private IPassengerService passgengerService;
 	@Autowired
 	private ITicketService ticketService;
+	@Autowired
+	private ICustomerService customerService;
 
 
 	@GetMapping("/order")
-	public String order(ModelMap model) {
+	public String order(ModelMap model,@ModelAttribute("thongbao") String tb) {
 		List<Order> list= orderService.getAll();
+		if (!tb.isEmpty()) {
+	        model.addAttribute("thongbao", tb);
+	    }
 		model.addAttribute("list", list);
 		return "admin/order/order";
 	}
@@ -42,7 +48,8 @@ public class OrderAdminControllers {
 		Order order = orderService.getOne(id);	
 		model.addAttribute("order", order);
 		Ticket ticket= order.getTicket();
-		List<Passenger> passengers = passgengerService.getNotInOrder();
+		List<Passenger> passengers = passgengerService.getNotInOrder(order.getPassenger().getId());
+		 model.addAttribute("customers", customerService.getAll());
 	    model.addAttribute("passengers", passengers); 
 	
 	    List<Ticket> tickets = ticketService.getAllstatusCr(ticket);
@@ -50,11 +57,17 @@ public class OrderAdminControllers {
 		return "admin/order/updateOrder";		
 	}
 	@PostMapping("/update-order")
-	public String updateOrder(@ModelAttribute("order") Order order, Model model) {
-	    if (orderService.update(order)) {
+	public String updateOrder(@ModelAttribute("order") Order order, Model model, RedirectAttributes redirectAttributes) {
+		System.out.println(order.getTicket().getReservationCode());
+
+		if (orderService.update(order)) {
+	    	  
+			redirectAttributes.addFlashAttribute("thongbao", "Đơn đặt được cập nhật thành công!");
+
 	        return "redirect:/admin/order";
 	    }	   
-	    model.addAttribute("Reate Failed", true);
+	    model.addAttribute("Update Failed", true);
+
 	    return "redirect:/admin/update-order";
 	}
 	@GetMapping("/delete-order/{id}")
@@ -72,18 +85,22 @@ public class OrderAdminControllers {
 	    List<Passenger> passengers = passgengerService.getNotInOrder();
 	    model.addAttribute("passengers", passengers); 
 	    List<Ticket> tickets = ticketService.getAllstatus();
+	    model.addAttribute("customers", customerService.getAll());
 	    model.addAttribute("tickets", tickets); 
 	    return "/admin/order/createOrder";
 	}
 	
 	
 	@PostMapping("/create-order")
-	public String createOrder(@ModelAttribute("order") Order order ) {
+	public String createOrder(@ModelAttribute("order") Order order, RedirectAttributes redirectAttributes ) {
+		System.out.println(order.getTicket().getReservationCode());
+
 		if(orderService.insert(order)) {
 			Ticket ticket= ticketService.getOne(order.getTicket().getId());
 			 Ticket.eStatus status = Ticket.eStatus.BOOKED;
 			ticket.setStatus(status);
 			ticketService.update(ticket);
+			   redirectAttributes.addFlashAttribute("thongbao", "Đơn đặt được tạo thành công!");
 			return "redirect:/admin/order";
 		}
 		return "redirect:/admin/create-order";

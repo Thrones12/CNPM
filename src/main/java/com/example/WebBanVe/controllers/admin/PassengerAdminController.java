@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.WebBanVe.service.interf.ICustomerService;
 import com.example.WebBanVe.service.interf.IPassengerService;
@@ -24,11 +25,15 @@ public class PassengerAdminController {
 	private IPassengerService passengerService;
 
 	@GetMapping("/passenger")
-	public String passenger(ModelMap model) {
-		List<Passenger> list= passengerService.getAll();
-		model.addAttribute("list", list);
-		return "admin/passenger/passenger";
+	public String passenger(ModelMap model, @ModelAttribute("thongbao") String tb) {
+	    List<Passenger> list = passengerService.getAll();
+	    model.addAttribute("list", list);
+	    if (!tb.isEmpty()) {
+	        model.addAttribute("thongbao", tb);
+	    }
+	    return "admin/passenger/passenger";
 	}
+
 	@GetMapping("/update-passenger/{id}")
 	public String updatePassenger(Model model, @PathVariable("id") Long id) {
 		Passenger passenger = passengerService.getOne(id);
@@ -36,8 +41,10 @@ public class PassengerAdminController {
 		return "admin/passenger/updatePassenger";		
 	}
 	@PostMapping("/update-passenger")
-	public String updatePassenger(@ModelAttribute("passenger") Passenger passenger) {
+	public String updatePassenger(@ModelAttribute("passenger") Passenger passenger,  RedirectAttributes redirectAttributes) {
+		
 	    if (passengerService.update(passenger)) {
+	    	 redirectAttributes.addFlashAttribute("thongbao", "Thông tin hành khách đã được cập nhật!");
 	        return "redirect:/admin/passenger";
 	    }	    
 	    return "redirect:/admin/update-passenger";
@@ -59,11 +66,12 @@ public class PassengerAdminController {
 	
 	
 	@PostMapping("/create-passenger")
-	public String createPassenger(@ModelAttribute("passenger") Passenger passenger ) {
-		if(passengerService.insert(passenger)) {
-			return "redirect:/admin/passenger";
-		}
-		
-		return "redirect:/admin/create-passenger";
+	public String createPassenger(@ModelAttribute("passenger") Passenger passenger, RedirectAttributes redirectAttributes) {
+	    if(passengerService.insert(passenger)) {
+	        redirectAttributes.addFlashAttribute("thongbao", "Thông tin hành khách đã được tạo thành công!");
+	        return "redirect:/admin/passenger";
+	    }
+	    return "redirect:/admin/create-passenger";
 	}
+
 }
