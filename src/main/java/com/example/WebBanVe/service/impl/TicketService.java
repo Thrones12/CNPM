@@ -1,5 +1,6 @@
 package com.example.WebBanVe.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.util.RouteMatcher.Route;
 
 import com.example.WebBanVe.entity.Passenger;
 import com.example.WebBanVe.entity.Ticket;
+import com.example.WebBanVe.entity.Ticket.eStatus;
 import com.example.WebBanVe.repository.TicketRepository;
 import com.example.WebBanVe.service.interf.IPassengerService;
 import com.example.WebBanVe.service.interf.IRouteService;
@@ -67,6 +69,39 @@ public class TicketService implements ITicketService {
             return false;
         }
     }
+    
+ 
+	@Override
+	public List<Ticket> getAllstatus() {
+
+		List<Ticket> all= repo.findAll();
+    	List<Ticket> list=new ArrayList<>();
+    	
+        for (Ticket ticket : all) {
+    
+            if (ticket.getStatus()==  Ticket.eStatus.ACTIVE) {
+    
+                list.add(ticket);
+            }
+        }
+    	return list;
+	}
+
+	@Override
+	public List<Ticket> getAllstatusCr( Ticket ticketCr) {
+		List<Ticket> all= repo.findAll();
+    	List<Ticket> list=new ArrayList<>();
+    	
+       for (Ticket ticket : all) {
+           
+        	if (ticket.getStatus().equals(Ticket.eStatus.ACTIVE) || ticket.equals(ticketCr)) {
+        	     
+                list.add(ticket);
+            }
+        }
+    	return list;
+	
+	}
 
 		
 	

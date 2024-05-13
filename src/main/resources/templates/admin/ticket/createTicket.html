@@ -7,13 +7,28 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 50%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
         }
         label {
             display: block;
             margin-bottom: 5px;
         }
-        input {
+        input, select {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
@@ -22,6 +37,7 @@
             box-sizing: border-box;
         }
         button {
+            width: 100%;
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
@@ -35,43 +51,45 @@
     </style>
 </head>
 <body>
-    <form role="form" method="post" th:action="@{/admin/create-ticket}" th:object="${ticket}">
+    <div class="container">
+        <h1 class="title">Create Ticket</h1>
         
-        <label for="price">Price:</label>
-        <input type="text" id="price" name="price" th:field="*{price}">
-	<label for="route">Route:</label>
-			<select id="route" name="route" th:field="*{route}">
-			    <option th:each="x : ${routes}" th:value="${x.id}" th:text="${x.name}"></option>
-			</select>
-		<label for="transport">Transport:</label>
-<select id="transport" name="transport" th:field="*{transport}">
-    <option th:each="x : ${transports}" th:value="${x.id}" th:text="${x.name}"></option>
-</select>
+        <form role="form" method="post" th:action="@{/admin/create-ticket}" th:object="${ticket}">
+            
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price" th:field="*{price}">
+            
+            <label for="route">Route:</label>
+            <select id="route" name="route" th:field="*{route}">
+                <option th:each="x : ${routes}" th:value="${x.id}" th:text="${x.name}"></option>
+            </select>
+            
+            <label for="transport">Transport:</label>
+            <select id="transport" name="transport" th:field="*{transport}">
+                <option th:each="x : ${transports}" th:value="${x.id}" th:text="${x.name}"></option>
+            </select>
+            
+            <label for="ticketClass">Ticket Class:</label>
+            <select id="ticketClass" name="ticketClass" th:field="*{ticketClass}">
+                <option value="ECONOMY">Economy</option>
+                <option value="BUSINESS">Business</option>
+                <option value="FIRST">First</option>
+            </select>
+            
+            <label for="reservationCode">Reservation Code:</label>
+            <input type="text" id="reservationCode" name="reservationCode" th:field="*{reservationCode}">
+            
+            <label for="status">Status:</label>
+            <select id="status" name="status" th:field="*{status}">
+                <option value="ACTIVE">Active</option>
+                <option value="EXPIRED">Expired</option>
+                <option value="USED">Used</option>
+                <option value="BOOKED">Booked</option>
+            </select>
+            
+            <button type="submit">Create Ticket</button>
+        </form>
+    </div>
 
-
-        
-        <label for="ticketClass">Ticket Class:</label>
-        <select id="ticketClass" name="ticketClass" th:field="*{ticketClass}">
-            <option value="ECONOMY">Economy</option>
-            <option value="BUSINESS">Business</option>
-            <option value="FIRST">First</option>
-        </select>
-        
-      
-
-        <label for="reservationCode">Reservation Code:</label>
-        <input type="text" id="reservationCode" name="reservationCode" th:field="*{reservationCode}">
-        
-       
-        <label for="status">Status:</label>
-        <select id="status" name="status" th:field="*{status}">
-            <option value="STANDING">Standing</option>
-            <option value="EXPIRED">Expired</option>
-            <option value="USED">Used</option>
-            <option value="BOOKED">Booked</option>
-        </select>
-        
-        <button type="submit">Create Ticket</button>
-    </form>
 </body>
 </html>

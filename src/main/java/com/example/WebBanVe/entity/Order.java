@@ -45,15 +45,13 @@ public class Order {
     @Column(name="total_price") 
     private Double totalPrice;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "ticket_id")
     private Ticket ticket;
     
     
-
-  @OneToOne(cascade=CascadeType.PERSIST)
-  @JoinColumn(name = "passenger_id", referencedColumnName="id")
-  @JsonManagedReference
+  @OneToOne(cascade = CascadeType.MERGE)
+  @JoinColumn(name = "passenger_id")
   private Passenger passenger;
     
     @Column(name = "status")

@@ -52,7 +52,7 @@ public class Ticket {
     @Column(name = "status")
     private eStatus status;
     public enum eStatus {
-    	STANDING, EXPIRED, USED, BOOKED;
+    	ACTIVE, EXPIRED, USED, BOOKED;
 	}
     @Column(name = " ticket_class")
     private TicketClass ticketClass;

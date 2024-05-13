@@ -1,19 +1,25 @@
 package com.example.WebBanVe.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.WebBanVe.entity.Passenger;
+import com.example.WebBanVe.repository.OrderRepository;
 import com.example.WebBanVe.repository.PassengerRepository;
 import com.example.WebBanVe.service.interf.IPassengerService;
+
+import jakarta.persistence.criteria.Order;
 
 @Service
 public class PassengerService implements IPassengerService {
     @Autowired
     private PassengerRepository repo;
-
+    
+    @Autowired
+    private OrderRepository repoOrder;
     @Override
     public List<Passenger> getAll() {
         return repo.findAll();
@@ -58,4 +64,29 @@ public class PassengerService implements IPassengerService {
 	        }
 	    
 	}
+
+	@Override
+	public List<Passenger> getNotInOrder() {
+	  
+	    List<Passenger> allPassengers = repo.findAll();
+	
+	    List<com.example.WebBanVe.entity.Order> allOrders = repoOrder.findAll();
+	    List<Passenger> passengersNotInOrder = new ArrayList<>();
+
+	    for (Passenger passenger : allPassengers) {
+	        boolean foundInOrder = false;
+	        for (com.example.WebBanVe.entity.Order order : allOrders) {
+
+	            if (order.getPassenger().equals(passenger)) {
+	                foundInOrder = true;
+	                break;
+	            }
+	        }
+	        if (!foundInOrder) {
+	            passengersNotInOrder.add(passenger);
+	        }
+	    }
+	    return passengersNotInOrder;
+	}
+
  }

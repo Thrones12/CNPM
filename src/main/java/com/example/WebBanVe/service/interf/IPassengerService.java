@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.example.WebBanVe.entity.Order;
 import com.example.WebBanVe.entity.Passenger;
 
 @Component
@@ -17,4 +18,5 @@ public interface IPassengerService {
 	boolean update(Passenger passenger);
 
 	boolean delete(Long id);
+	List<Passenger> getNotInOrder();
 }

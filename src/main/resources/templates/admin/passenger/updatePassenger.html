@@ -7,7 +7,22 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            width: 50%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
         }
         label {
             display: block;
@@ -22,6 +37,7 @@
             box-sizing: border-box;
         }
         button {
+            width: 100%;
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
@@ -35,9 +51,8 @@
     </style>
 </head>
 <body>
-    <h1>Update Passenger</h1>
-    
     <form role="form" method="post" action="/admin/update-passenger">
+        <h1>Update Passenger</h1>
         <input type="hidden" id="id" name="id" th:value="${passenger.id}">
         
         <label for="personId">Person ID:</label>

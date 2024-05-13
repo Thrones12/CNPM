@@ -41,9 +41,11 @@ public class OrderAdminControllers {
 	public String updateOrder(Model model, @PathVariable("id") Long id) {
 		Order order = orderService.getOne(id);	
 		model.addAttribute("order", order);
-		 List<Passenger> passengers = passgengerService.getAll();
-		    model.addAttribute("passengers", passengers); 
-		    List<Ticket> tickets = ticketService.getAll();
+		Ticket ticket= order.getTicket();
+		List<Passenger> passengers = passgengerService.getNotInOrder();
+	    model.addAttribute("passengers", passengers); 
+	
+	    List<Ticket> tickets = ticketService.getAllstatusCr(ticket);
 		    model.addAttribute("tickets", tickets); 
 		return "admin/order/updateOrder";		
 	}
@@ -67,21 +69,23 @@ public class OrderAdminControllers {
 	public String addOrder(Model model) {
 	    Order order = new Order();
 	    model.addAttribute("order", order);
-	    List<Passenger> passengers = passgengerService.getAll();
+	    List<Passenger> passengers = passgengerService.getNotInOrder();
 	    model.addAttribute("passengers", passengers); 
-	    List<Ticket> tickets = ticketService.getAll();
+	    List<Ticket> tickets = ticketService.getAllstatus();
 	    model.addAttribute("tickets", tickets); 
 	    return "/admin/order/createOrder";
 	}
-
 	
 	
 	@PostMapping("/create-order")
 	public String createOrder(@ModelAttribute("order") Order order ) {
 		if(orderService.insert(order)) {
+			Ticket ticket= ticketService.getOne(order.getTicket().getId());
+			 Ticket.eStatus status = Ticket.eStatus.BOOKED;
+			ticket.setStatus(status);
+			ticketService.update(ticket);
 			return "redirect:/admin/order";
 		}
-		
 		return "redirect:/admin/create-order";
 	}
 }

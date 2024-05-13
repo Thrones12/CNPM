@@ -9,7 +9,8 @@ import com.example.WebBanVe.entity.Ticket;
 @Component
 public interface ITicketService {
 	List<Ticket> getAll();
-
+	List<Ticket> getAllstatus();
+	List<Ticket> getAllstatusCr(Ticket ticket);
 	Ticket getOne(Long id);
 
 	boolean insert(Ticket ticket);
@@ -17,5 +18,6 @@ public interface ITicketService {
 	boolean update(Ticket ticket);
 
 	boolean delete(Long id);
+
 
 }
