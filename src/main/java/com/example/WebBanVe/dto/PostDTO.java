@@ -2,8 +2,7 @@ package com.example.WebBanVe.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class PostDTO 
-{
+public class PostDTO {
 	private Long id;
 	private Integer customerId;
 	private Integer locationId;

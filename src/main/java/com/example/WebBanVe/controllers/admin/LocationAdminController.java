@@ -26,7 +26,8 @@ import com.example.WebBanVe.service.interf.IPostService;
 
 @Controller
 @RequestMapping("/admin")
-public class LocationAdminController {
+public class LocationAdminController 
+{
 
     @Autowired
     private ILocationService locationService;

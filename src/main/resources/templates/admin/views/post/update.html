@@ -8,6 +8,7 @@
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Chỉnh sửa bài đăng</h1>
+        
 
         <form th:action="@{/admin/post/edit}" th:object="${post}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:field="*{id}">

@@ -29,7 +29,8 @@ import com.example.WebBanVe.service.interf.IPostService;
 
 @Controller
 @RequestMapping("/admin")
-public class PostAdminController {
+public class PostAdminController 
+{
 
     @Autowired
     private IPostService postService;

@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class ImageUploadController 
-{
+public class ImageUploadController {
 	@RequestMapping(value = "admin/getimage/{photo}", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<ByteArrayResource> getImage(@PathVariable("photo") String photo)

@@ -20,7 +20,8 @@ import com.example.WebBanVe.service.interf.ILocationService;
 
 @RestController
 @RequestMapping("/api")
-public class LocationAPI {
+public class LocationAPI 
+{
     @Autowired
     private ILocationService locationService;
 
