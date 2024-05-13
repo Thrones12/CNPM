@@ -12,30 +12,40 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.WebBanVe.entity.Passenger;
+import com.example.WebBanVe.entity.Ticket;
 import com.example.WebBanVe.service.interf.IPassengerService;
+import com.example.WebBanVe.service.interf.ITicketService;
 
-
-	@Controller 
-	@RequestMapping("/user")
+import jakarta.servlet.http.HttpSession;
+@Controller 
+@RequestMapping("/user")
 public class UserPassengerController {
-		@Autowired
-		private IPassengerService passengerService;
-		
-		@GetMapping("/userpassenger")
-		public String order(ModelMap model) {
-			Passenger passenger = new Passenger();
-			model.addAttribute("passenger", passenger);
-			return "user/userPassenger";
-		}
-		@PostMapping("/userpassenger")
-		public String createPassenger(@ModelAttribute("passenger") Passenger passenger ) {
-			  if(passengerService.insert(passenger)) 
-				  return "/user/userpassenger";
-		        
-			  return "/user/userpassenger";
-		    }
-	
+    @Autowired
+    private IPassengerService passengerService;
+    @Autowired
+    private ITicketService ticketService;
 
+    @GetMapping("/userpassenger/{ticket_id}")
+    public String passenger(ModelMap model, @PathVariable("ticket_id") Long id, HttpSession session) {
+        Passenger passenger = new Passenger();
+        model.addAttribute("passenger", passenger);
+        Ticket ticket = ticketService.getOne(id);
+        session.setAttribute("ticket", ticket);
+        return "user/userPassenger";
+    }
+
+    @PostMapping("/userpassenger")
+    public String createPassengerUser(@ModelAttribute("passenger") Passenger passenger, Model model, HttpSession session) {
+    
+        Ticket ticket = (Ticket) session.getAttribute("ticket");
+        if (ticket != null && passengerService.insert(passenger)) {
+            model.addAttribute("passenger", passenger);   
+            model.addAttribute("ticket", ticket);  
+            return "user/userOrder";
+        }
+        return "redirect:/user/userpassenger/" + ticket.getId();
+    }
 }
