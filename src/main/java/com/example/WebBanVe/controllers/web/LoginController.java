@@ -52,16 +52,23 @@ public class LoginController {
 		return "web/views/login/vertify";
 	}
 
+	@GetMapping("logout")
+	public String getLogout(HttpServletRequest request, HttpServletResponse response) {
+		CookieManager.deleteCookie(request, response, "user_id");
+		return "web/views/home";
+	}
+
 	@PostMapping("login")
-	public String postLogin(HttpServletResponse response, @RequestParam String username, @RequestParam String password,
-			ModelMap model) {
+	public String postLogin(HttpServletRequest request, HttpServletResponse response, @RequestParam String username,
+			@RequestParam String password, ModelMap model) {
 		Account account = accService.getOne(username);
+		model.addAttribute("user_id", CookieManager.getCookieValue(request, "user_id"));
 		if (account == null) {
 			model.addAttribute("message", "Tài khoản không tồn tại!");
 			return "web/views/login/login";
 		}
 		if (account.getPassword().equals(password)) {
-			Cookie cookie = new Cookie("customer_id", cusService.getByAccountUsername(username).getId().toString());
+			Cookie cookie = new Cookie("user_id", cusService.getByAccountUsername(username).getId().toString());
 			cookie.setMaxAge(3600);
 			response.addCookie(cookie);
 			return "redirect:home";
@@ -107,10 +114,9 @@ public class LoginController {
 			}
 			model.addAttribute("message", "Tên tài khoản và email không phù hợp!");
 			return "web/views/login/forgot";
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			model.addAttribute("message", "Tên tài khoản và email không phù hợp!");
-			return "web/views/login/forgot";	
+			return "web/views/login/forgot";
 		}
 	}
 
