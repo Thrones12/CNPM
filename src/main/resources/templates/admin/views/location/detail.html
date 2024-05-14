@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/layout-admin.html}">
+
+<body>
+
+    <div layout:fragment="content">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+            <!--begin::Post-->
+            <div class="content flex-row-fluid" id="kt_content">
+                <!--begin::Card-->
+                <div class="card">
+                    <!--begin::Card header-->
+                    <div class="card-header border-0 pt-6">
+                        <!--begin::Card title-->
+                        <div class="card-title">
+                            <h1 class="mb-4">Chi tiết vị trí</h1>
+                        </div>
+                        <!--begin::Card title-->
+                        <!--begin::Card toolbar-->
+                        <div class="card-toolbar">
+                            <!--begin::Toolbar-->
+                            <div class="d-flex justify-content-end" data-kt-location-table-toolbar="base">
+                                <!--begin::Add post-->
+                                <a type="button" class="btn btn-primary" th:href="@{/admin/location/{id}/create-post(id=${location.id})}">Thêm Bài Đăng</a>
+                                <!--end::Add post-->
+                            </div>
+                            <!--end::Toolbar-->
+                        </div>
+                        <!--end::Card toolbar-->
+                    </div>
+                    <!--end::Card header-->
+                    <!--begin::Card body-->
+                    <div class="card-body pt-0">
+                        <!--begin::Location detail-->
+                        <div class="card mb-5">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${location.name}"></h5>
+                                <p class="card-text" th:text="${location.street}"></p>
+                                <p class="card-text" th:text="${location.ward}"></p>
+                                <p class="card-text" th:text="${location.district}"></p>
+                                <p class="card-text" th:text="${location.province}"></p>
+                            </div>
+                        </div>
+                        <!--end::Location detail-->
+
+                        <!--begin::Post form-->
+                        <!--begin::Post detail-->
+<div class="card mb-5">
+    <div class="card-header">
+        <h3 class="card-title">Chi tiết bài đăng</h3>
+    </div>
+    <div class="card-body">
+        <form th:action="@{/admin/location/{id}/create-post(id=${location.id})}" th:object="${postDTO}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="content" class="required fs-6 fw-semibold mb-2">Nội dung</label>
+                <textarea class="form-control form-control-solid" id="content" rows="3" th:field="*{content}"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="picture" class="required fs-6 fw-semibold mb-2">Ảnh</label>
+                <input type="file" class="form-control form-control-solid" id="picture" name="picture">
+            </div>
+            <button type="submit" class="btn btn-primary">Lưu</button>
+        </form>
+    </div>
+</div>
+<!--end::Post detail-->
+
+
+                        <!--begin::Post list-->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Danh sách các bài đăng</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_posts_table">
+                                    <thead>
+                                        <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                            <th>ID</th>
+                                            <th>Khách hàng</th>
+                                            <th>Ảnh</th>
+                                            <th>Nội dung</th>
+                                            <th>Đánh giá</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="fw-semibold text-gray-600">
+                                        <tr th:each="post : ${posts}">
+                                            <td th:text="${post.id}"></td>
+                                            <td th:text="${post.customer.name}"></td>
+                                            <td>
+                                                <img th:src="@{'/admin/getimage/'+${post.picture}}" alt="" width="100" height="70">
+                                            </td>
+                                            <td th:text="${post.content}"></td>
+                                            <td th:text="${post.rating}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--end::Post list-->
+                    </div>
+                    <!--end::Card body-->
+                </div>
+                <!--end::Card-->
+            </div>
+            <!--end::Post-->
+        </div>
+        <!--end::Container-->
+    </div>
+</body>
+
+</html>

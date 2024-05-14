@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout-admin.html}">
 <head>
     <meta charset="UTF-8">
     <title>Chỉnh sửa Nhà sản xuất</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container mt-5" layout:fragment="content">
         <h1 class="mb-4">Chỉnh sửa Nhà sản xuất</h1>
 
         <form th:action="@{/admin/manufacture/edit}" th:object="${manufacture}" method="post">

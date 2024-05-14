@@ -51,6 +51,7 @@ public class CustomerService implements ICustomerService{
 	public boolean update(Customer customer) {
 		try {
 			repo.save(customer);
+			repo.flush();
 			return true;
 		}
 		catch(Exception e) {

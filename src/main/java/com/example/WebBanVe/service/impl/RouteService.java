@@ -32,12 +32,11 @@ public class RouteService implements IRouteService
 
 	@Override
 	@Transactional
-	public List<Object[]> search(Long departure_id, Long arrival_id, String start, eTransportType eType) {
+	public List<Object[]> search(Long departure_id, Long arrival_id, String start, eTransportType eType, String tcSelected) {
 		LocalDate dateStart = DateTimeConverter.convertStringToLocalDate(start);
 		List<Route> result = new ArrayList<Route>();
-		return repo.searchTicket(departure_id, arrival_id, dateStart, eType.toString());
+		return repo.searchTicket(departure_id, arrival_id, dateStart, eType.toString(), tcSelected);
 	}
-
 	@Override
 	public Route getOne(Long id) {
 		return repo.findById(id).get();

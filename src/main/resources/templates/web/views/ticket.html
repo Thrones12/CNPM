@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout-web.html}">
+
+<body>
+	<div layout:fragment="content">
+		<!--begin::Container-->
+		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+			<!--begin::Form-->
+			<div class="d-flex flex-center flex-column flex-lg-row-fluid">
+				<!--begin::Search-->
+				<div class="w-lg-800px p-10">
+					<!--begin::Title-->
+					<h1 class="text-gray-900 fw-bolder mb-3">Thông Tin Vé</h1>
+
+					<!--begin::Gender-->
+					<div class="row g-9 mb-7">
+						<div class="col-md-6 fv-row">
+							<label class="fs-6 fw-semibold mb-2">Ga đi:</label>
+							<p class="form-control form-control-solid" name="name"
+								th:text="${ticket.route.departure.name}" />
+						</div>
+						<div class="col-md-6 fv-row">
+							<label class="fs-6 fw-semibold mb-2">Ga đến:</label>
+							<p class="form-control form-control-solid" name="name"
+								th:text="${ticket.route.arrival.name}" />
+						</div>
+					</div>
+					<!--end::Gender-->
+
+					<!--begin::Gender-->
+					<div class="row g-9 mb-7">
+						<div class="col-md-6 fv-row">
+							<label class="fs-6 fw-semibold mb-2">Phương tiện di
+								chuyển:</label>
+							<p class="form-control form-control-solid" name="name" th:text="${ticket.transport.name}" />
+
+						</div>
+						<div class="col-md-6 fv-row">
+							<label class="fs-6 fw-semibold mb-2">Ngày đi:</label>
+							<p class="form-control form-control-solid" name="name" th:text="${departure_date}" />
+						</div>
+					</div>
+					<!--end::Gender-->
+
+					<!--begin::Gender-->
+					<div class="row g-9 mb-7">
+						<div class="col-md-6 fv-row">
+							<label class="fs-6 fw-semibold mb-2">Giờ khởi hành:</label>
+							<p class="form-control form-control-solid" name="name"
+								th:text="${departure_time} + ' --> ' + ${arrival_time}" />
+						</div>
+						<div class="col-md-6 fv-row">
+							<label class="fs-6 fw-semibold mb-2">Thời gian di chuyển:</label>
+							<p class="form-control form-control-solid" name="name" th:text="${ticket.route.duration}" />
+						</div>
+					</div>
+					<!--end::Gender-->
+
+					<!--begin::Gender-->
+					<div class="row g-9 mb-7">
+						<div class="col-md-6 fv-row">
+							<label class="fs-6 fw-semibold mb-2">Mã đặt chỗ:</label>
+							<p class="form-control form-control-solid" name="name"
+								th:text="${ticket.reservationCode}" />
+
+						</div>
+						<div class="col-md-6 fv-row">
+							<label class="fs-6 fw-semibold mb-2">Hạng vé:</label>
+							<p class="form-control form-control-solid" name="name" th:text="${ticket.ticketClass}" />
+						</div>
+					</div>
+					<!--end::Gender-->
+
+					<!--begin::Name-->
+					<div class="fv-row mb-7">
+						<label class="fs-6 fw-semibold mb-2">Giá vé:</label>
+						<p class="form-control form-control-solid" style="color:red" name="name"
+							th:text="${ticket.price}" />
+					</div>
+					<!--end::Name-->
+					<form method="get" th:action="passenger">
+						<input type="hidden" name="ticket_id" th:value="${ticket.id}">
+						<button type="submit" class="btn btn-primary">Tiến Hành Đặt Vé</button>
+					</form>
+					<!--end::Title-->
+
+				</div>
+				<!--end::Search-->
+			</div>
+			<!--end::Form-->
+		</div>
+	</div>
+</body>
+
+</html>

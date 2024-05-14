@@ -1,29 +1,25 @@
 package com.example.WebBanVe.entity;
+import java.time.LocalDateTime;
 
-import com.example.WebBanVe.entity.Ticket.eStatus;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.WebBanVe.Enumeration.eOrderStatus;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "orders")
@@ -35,10 +31,13 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(name="customer_id")
+	private Customer customer;
 
 	@Column(name = "order_date")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date orderDate;
+	private LocalDateTime orderDate;
 
 	@Column(name = "total_price")
 	private Double totalPrice;
@@ -53,10 +52,6 @@ public class Order {
 	private Passenger passenger;
 
 	@Column(name = "status")
-
-	private eStatus status;
-
-	public enum eStatus {
-		PAID, UNPAID, REFUND;
-	}
+	@Enumerated(EnumType.STRING)
+	private eOrderStatus status;
 }

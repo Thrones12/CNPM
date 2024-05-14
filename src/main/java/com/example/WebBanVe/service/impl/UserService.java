@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.WebBanVe.entity.Customer;
 import com.example.WebBanVe.entity.User;
 import com.example.WebBanVe.repository.UserRepository;
 import com.example.WebBanVe.service.interf.IUserService;
@@ -22,6 +23,11 @@ public class UserService implements IUserService{
 	@Override
 	public User getOne(Long id) {
 		return repo.findById(id).get();
+	}
+
+	@Override
+	public User getByAccountUsername(String username) {
+		return repo.getByAccountUsername(username);
 	}
 
 	@Override

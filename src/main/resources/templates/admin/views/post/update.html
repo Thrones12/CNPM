@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/layout-admin.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Chỉnh sửa bài đăng</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5" layout:fragment="content">
+        <h1 class="mb-4">Chỉnh sửa bài đăng</h1>
+        
+
+        <form th:action="@{/admin/post/edit}" th:object="${post}" method="post" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="form-group">
+                <label for="content">Nội dung</label>
+                <textarea class="form-control" id="content" rows="3" th:field="*{content}"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="picture">Ảnh</label>
+                <input type="file" class="form-control-file" id="picture" name="picture">
+            </div>
+
+            <div class="form-group">
+                <label for="rating">Đánh giá</label>
+                <input type="number" class="form-control" id="rating" th:field="*{rating}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Lưu</button>
+        </form>
+    </div>
+</body>
+</html>

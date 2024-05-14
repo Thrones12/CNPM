@@ -15,13 +15,14 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
 	List<String> findDistinctProvince();
 
 	@Query("SELECT DISTINCT l.district FROM Location l WHERE l.province = :province")
-    List<String> findDistinctDistrictByProvince(String province);
+	List<String> findDistinctDistrictByProvince(String province);
 
 	@Query("SELECT DISTINCT l.ward FROM Location l WHERE l.province = :province AND l.district = :district")
-	List<String> findWardsByProvinceAndDistrict(
-	        @Param("province") String province,
-	        @Param("district") String district);
-	
+	List<String> findWardsByProvinceAndDistrict(@Param("province") String province, @Param("district") String district);
+
 	@Query("SELECT l FROM Location l WHERE l.province = :province AND l.district = :district AND l.ward = :ward")
-    List<Location> findLocationsByProvinceDistrictAndWard(@Param("province") String province, @Param("district") String district, @Param("ward") String ward);
+	List<Location> findLocationsByProvinceDistrictAndWard(@Param("province") String province,
+			@Param("district") String district, @Param("ward") String ward);
+
+	List<Location> findAllByNameNotNull();
 }

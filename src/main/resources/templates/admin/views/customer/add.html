@@ -31,7 +31,7 @@
 									placeholder="VD: Nguyễn Văn A" name="name" value="" />
 							</div>
 							<!--end::Name-->
-							
+
 							<!--begin::Gender-->
 							<div class="row g-9 mb-7">
 								<div class="col-md-6 fv-row">
@@ -40,9 +40,9 @@
 										placeholder="VD: Nam" name="gender" value="" />
 								</div>
 								<div class="col-md-6 fv-row">
-								<label class="required fs-6 fw-semibold mb-2">Ngày sinh:</label>
-								<input type="date" class="form-control form-control-solid" th:field="*{birthdate}"
-									placeholder="VD: 2024-5-11" name="birthdate" value="" />
+									<label class="required fs-6 fw-semibold mb-2">Ngày sinh:</label>
+									<input type="date" class="form-control form-control-solid" th:field="*{birthdate}"
+										placeholder="VD: 2024-5-11" name="birthdate" value="" />
 								</div>
 							</div>
 							<!--end::Gender-->
@@ -85,18 +85,40 @@
 								href="#kt_modal_add_customer_billing_info" role="button" aria-expanded="false"
 								aria-controls="kt_customer_view_details">
 								Địa Chỉ
-								<span class="ms-2 rotate-180">
-									<i class="ki-duotone ki-down fs-3"></i>
-								</span>
 							</div>
 
-							<!--begin::Address-->
-							<div class="fv-row mb-7">
-								<label class="required fs-6 fw-semibold mb-2">Địa chỉ:</label>
-								<input type="text" class="form-control form-control-solid" th:field="*{address}"
-									placeholder="VD: cus@123" name="password" value="" />
+							<!--begin::Gender-->
+							<div class="row g-9 mb-7">
+								<div class="col-md-6 fv-row">
+									<label class="required fs-6 fw-semibold mb-2">Tỉnh/Thành Phố:</label>
+									<input type="text" class="form-control form-control-solid"
+										th:field="*{location.province}" placeholder="VD: Thành phố Hồ Chí Minh"
+										name="province" value="" />
+								</div>
+								<div class="col-md-6 fv-row">
+									<label class="required fs-6 fw-semibold mb-2">Quận/Huyện:</label>
+									<input type="text" class="form-control form-control-solid"
+										th:field="*{location.district}" placeholder="VD: Quận Gò Vấp" name="district"
+										value="" />
+								</div>
 							</div>
-							<!--end::Address-->
+							<!--end::Gender-->
+
+							<!--begin::Gender-->
+							<div class="row g-9 mb-7">
+								<div class="col-md-6 fv-row">
+									<label class="required fs-6 fw-semibold mb-2">Phường/Xã:</label>
+									<input type="text" class="form-control form-control-solid"
+										th:field="*{location.ward}" placeholder="VD: Phường 14" name="ward" value="" />
+								</div>
+								<div class="col-md-6 fv-row">
+									<label class="required fs-6 fw-semibold mb-2">Đường:</label>
+									<input type="text" class="form-control form-control-solid"
+										th:field="*{location.street}" placeholder="VD: đường số 59" name="street"
+										value="" />
+								</div>
+							</div>
+							<!--end::Gender-->
 							<!--end::Billing form-->
 						</div>
 						<!--end::Scroll-->

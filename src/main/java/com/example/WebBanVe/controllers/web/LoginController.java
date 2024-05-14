@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.WebBanVe.Enumeration.eAccountStatus;
+import com.example.WebBanVe.Enumeration.eRole;
 import com.example.WebBanVe.Utils.CookieManager;
 import com.example.WebBanVe.Utils.Email;
 import com.example.WebBanVe.Utils.Validator.AccountValidatorManager;
@@ -16,6 +17,7 @@ import com.example.WebBanVe.entity.Account;
 import com.example.WebBanVe.entity.Customer;
 import com.example.WebBanVe.service.interf.IAccountService;
 import com.example.WebBanVe.service.interf.ICustomerService;
+import com.example.WebBanVe.service.interf.IUserService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,6 +30,8 @@ public class LoginController {
 	private IAccountService accService;
 	@Autowired
 	private ICustomerService cusService;
+	@Autowired
+	private IUserService userService;
 
 	@GetMapping("login")
 	public String getLogin(ModelMap model) {
@@ -56,7 +60,7 @@ public class LoginController {
 	@GetMapping("logout")
 	public String getLogout(HttpServletRequest request, HttpServletResponse response) {
 		CookieManager.deleteCookie(request, response, "user_id");
-		return "web/views/home";
+		return "redirect:home";
 	}
 
 	@PostMapping("login")
@@ -68,11 +72,15 @@ public class LoginController {
 			model.addAttribute("message", "Tài khoản không tồn tại!");
 			return "web/views/login/login";
 		}
+
 		if (account.getPassword().equals(password)) {
-			Cookie cookie = new Cookie("user_id", cusService.getByAccountUsername(username).getId().toString());
+			Cookie cookie = new Cookie("user_id", userService.getByAccountUsername(username).getId().toString());
 			cookie.setMaxAge(3600);
 			response.addCookie(cookie);
-			return "redirect:home";
+			if (account.getRole() == eRole.CUSTOMER)
+				return "redirect:home";
+			else if (account.getRole() == eRole.ADMIN)
+				return "redirect:admin/customer";
 		}
 
 		model.addAttribute("message", "Sai mật khẩu!");
@@ -123,8 +131,6 @@ public class LoginController {
 
 	@PostMapping("vertify")
 	public String postVertify(HttpServletRequest request, @RequestParam String otp, ModelMap model) {
-		System.out.println(otp);
-		System.out.println(CookieManager.getCookieValue(request, "otp"));
 		if (otp.equals(CookieManager.getCookieValue(request, "otp"))) {
 			System.out.println("success");
 			Account account = accService.getOne(CookieManager.getCookieValue(request, "username").toString());

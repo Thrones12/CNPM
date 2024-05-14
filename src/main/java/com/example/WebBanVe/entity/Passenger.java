@@ -49,7 +49,7 @@ public class Passenger {
     @Column(name = "birth_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
-
+    @JsonIgnore
     @OneToOne(mappedBy = "passenger")
     private Order order;
 

@@ -6,43 +6,179 @@
 	<div layout:fragment="content">
 		<!--begin::Container-->
 		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
-			<!--begin::Form-->
-			<div class="d-flex flex-center flex-column flex-lg-row-fluid">
-				<!--begin::Search-->
-				<div class="w-lg-500px p-10">
-					<form method="get" th:action="@{ticket-train}">
-						<!--begin::Heading-->
-						<div class="text-center mb-11">
-							<!--begin::Title-->
-							<h1 class="text-gray-900 fw-bolder mb-3">Tìm vé tàu lửa</h1>
-							<!--end::Title-->
-						</div>
-						<!--begin::Heading-->
-						<select name="departure_id">
-							<option th:each="departure : ${departures}" th:value="${departure.id}"
-								th:text="${departure.name}"></option>
-						</select>
-						<select name="arrival_id">
-							<option th:each="arrival : ${arrivals}" th:value="${arrival.id}" th:text="${arrival.name}">
-							</option>
-						</select>
-						<label for="departure_time">Chọn ngày khởi hành:</label>
-						<input type="date" id="departure_time" name="departure_time" th:value="${datenow}"><br>
-						<input type="submit" value="Tim Kiếm">
-					</form>
-				</div>
-				<!--end::Search-->
-				<!--begin::Ticket-->
-				<div class="w-lg-500px p-10">
-					<div th:each="route : ${routes}">
-						<p th:text="${route.name}">asd</p>
-						
-					</div>
-				</div>
-				<!--end::Ticket-->
+			<div th:each="route : ${routes}">
+				<a th:href="'ticket?route_id='+${route[0]}+'&transport_id='+${route[1]}"
+					th:text="${route[2]} + ${route[3]}"></a>
+
 			</div>
-			<!--end::Form-->
 		</div>
+
+		<!--begin::Container-->
+		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+			<!--begin::Post-->
+			<div class="content flex-row-fluid" id="kt_content">
+				<!--begin::Row-->
+				<div class="row g-5 g-xxl-8">
+					<!--begin::Col-->
+					<div class="col-xl-4">
+						<!--begin::Charts Widget 1-->
+						<div class="card mb-5 mb-xxl-8">
+							<!--begin::Wrapper-->
+							<div class="card-body px-6 px-lg-10 px-xxl-15 py-20">
+								<form method="get" th:action="@{ticket-train}">
+									<!--begin::Heading-->
+									<div class="text-center mb-11">
+										<!--begin::Title-->
+										<h1 class="text-gray-900 fw-bolder mb-3">Tìm vé tàu lửa</h1>
+										<!--end::Title-->
+									</div>
+									<!--begin::Heading-->
+									<!--begin::Message-->
+									<div class="fs-6 fw-semibold mb-2" style="color: red;" th:text="${message}"></div>
+									<!--end::Message-->
+									<!--begin::Input group-->
+									<div class="row mb-8">
+										<label class="required fs-6 fw-semibold mb-2">Điểm đi:</label>
+										<select class="form-select form-select-solid" data-control="select2"
+											name="departure_id">
+											<option th:each="departure : ${departures}"
+												th:selected="${departure.id == dSelected}" th:value="${departure.id}"
+												th:text="${departure.name}"></option>
+										</select>
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Input group-->
+									<div class="row mb-8">
+										<label class="required fs-6 fw-semibold mb-2">Điểm đến:</label>
+										<select class="form-select form-select-solid" data-control="select2"
+											data-hide-search="true" data-placeholder="Select a Team Member"
+											name="arrival_id">
+											<option th:each="arrival : ${arrivals}"
+												th:selected="${arrival.id == aSelected}" th:value="${arrival.id}"
+												th:text="${arrival.name}">
+											</option>
+										</select>
+									</div>
+									<!--end::Input group-->
+									<!--begin::Input group-->
+									<div class="row mb-8">
+										<label class="required fs-6 fw-semibold mb-2">Ngày khởi hành:</label>
+										<!--begin::Input-->
+										<div class="position-relative d-flex align-items-center">
+											<!--begin::Icon-->
+											<i class="ki-duotone ki-calendar-8 fs-2 position-absolute mx-4">
+												<span class="path1"></span>
+												<span class="path2"></span>
+												<span class="path3"></span>
+												<span class="path4"></span>
+												<span class="path5"></span>
+												<span class="path6"></span>
+											</i>
+											<!--end::Icon-->
+											<!--begin::Datepicker-->
+											<input type="date" name="departure_time"
+												th:value="${tSelected!=null?tSelected:datenow}"
+												class="form-control form-control-solid ps-12"
+												placeholder="Select a date" />
+											<!--end::Datepicker-->
+										</div>
+										<!--end::Input-->
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Input group-->
+									<div class="row g-9 mb-8">
+										<div class="col-md-6 fv-row">
+											<label class="required fs-6 fw-semibold mb-2">Hạng Vé:</label>
+											<select class="form-select form-select-solid" data-control="select2"
+												data-hide-search="true" data-placeholder="Select a Team Member"
+												name="tcSelected">
+												<option th:each="c : ${ticketClass}" th:selected="${c == tcSelected}"
+													th:value="${c}" th:text="${c}">
+												</option>
+											</select>
+										</div>
+										<div class="col-md-6 fv-row">
+											<label class="required fs-6 fw-semibold mb-2">Tác vụ:</label>
+											<input type="submit" class="btn btn-primary" value="Tìm Kiếm Vé">
+										</div>
+									</div>
+									<!--end::Input group-->
+								</form>
+							</div>
+						</div>
+						<!--end::Charts Widget 1-->
+					</div>
+					<!--end::Col-->
+					<!--begin::Col-->
+					<div class="col-xl-8">
+						<!--begin::Feeds Widget 1-->
+						<div th:each="object : ${objects}" class="card mb-5 mb-xxl-8">
+							<!--begin::Body-->
+							<div class="card-body pb-0">
+								<!--begin::Header-->
+								<div class="d-flex align-items-center">
+									<!--begin::User-->
+									<div class="d-flex align-items-center flex-grow-1">
+										<!--begin::Info-->
+										<div class="d-flex flex-column">
+											<p class="text-gray-900 fs-6 fw-bold"
+												th:text="'Hãng tàu lửa: '+${object[0]}"></p>
+											<p class="text-gray-900 fs-6 fw-bold" th:text="'Tuyến: '+${object[1]}"></p>
+
+										</div>
+										<!--end::Info-->
+									</div>
+									<!--end::User-->
+									<!--begin::Menu-->
+									<div class="my-0">
+										<p class="text-gray-900 fs-6 fw-bold"
+											th:text="'Khởi hành: '+${object[2]} + ' --> ' + ${object[3]}"></p>
+										<p class="text-gray-900 fs-6 fw-bold"
+											th:text="'Thời gian di chuyển: '+${object[4]}"></p>
+									</div>
+									<!--end::Menu-->
+								</div>
+								<!--end::Header-->
+
+								<div class="separator"></div>
+								<!--begin::Header-->
+								<div class="d-flex align-items-center" style="margin-top:10px">
+									<!--begin::User-->
+									<div class="d-flex align-items-center flex-grow-1">
+										<!--begin::Info-->
+										<div class="d-flex flex-column">
+											<p class="text-gray-900 fs-6 fw-bold" th:text="'Giá tiền: '+${object[5]}">
+											</p>
+										</div>
+										<!--end::Info-->
+									</div>
+									<!--end::User-->
+									<!--begin::Menu-->
+									<div class="my-0">
+										<p class="text-gray-900 fs-6 fw-bold" th:text="'Hạng vé: '+${object[6]}"></p>
+									</div>
+									<!--end::Menu-->
+								</div>
+								<!--end::Header-->
+								<a th:href="'ticket?route_id='+${object[7]}+'&transport_id='+${object[8]}">
+									<div class="col-md-4 fv-row" style="margin-bottom: 15px;">
+										<input type="button" class="btn btn-primary" value="Đặt vé">
+									</div>
+								</a>
+							</div>
+							<!--end::Body-->
+						</div>
+						<!--end::Feeds Widget 1-->
+					</div>
+					<!--end::Col-->
+				</div>
+				<!--end::Row-->
+			</div>
+			<!--end::Post-->
+		</div>
+		<!--end::Container-->
 	</div>
 </body>
 
