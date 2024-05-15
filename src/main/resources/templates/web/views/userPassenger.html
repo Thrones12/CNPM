@@ -4,42 +4,56 @@
 
 <body>
 	<div layout:fragment="content">
+		
+		<!--begin::Container-->
+		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+			<!--begin::Form-->
+			<div class="d-flex flex-center flex-column flex-lg-row-fluid">
+				<!--begin::Search-->
+				<div class="w-lg-800px p-10">
+					<!--begin::Title-->
+					<h1 class="text-gray-900 fw-bolder mb-3">Thông Tin Hành Khách</h1>
+					<!--begin::Name-->
+					<form method="post" action="/userpassenger">
+						<div class="row g-9 mb-7">
+							<label class="fs-6 fw-semibold mb-2" for="personId">Số CMND:</label>
+							<input class="form-control form-control-solid" type="text" id="personId" name="personId" required>
+						</div>
+						<div class="row g-9 mb-7">
+							<label class="fs-6 fw-semibold mb-2" for="lname">Họ:</label>
+							<input class="form-control form-control-solid" type="text" id="lname" name="lname" required>
+						</div>
+						<div class="row g-9 mb-7">
+							<label class="fs-6 fw-semibold mb-2" for="fname">Tên:</label>
+							<input class="form-control form-control-solid" type="text" id="fname" name="fname" required>
+						</div>
+						<div class="row g-9 mb-7">
+							<label class="fs-6 fw-semibold mb-2" for="email">Email:</label>
+							<input class="form-control form-control-solid" type="email" id="email" name="email" required>
+						</div>
+						<div class="row g-9 mb-7">
+							<label class="fs-6 fw-semibold mb-2" for="phone">Số điện thoại:</label>
+							<input class="form-control form-control-solid" type="text" id="phone" name="phone" required>
+						</div>
+						<div class="row g-9 mb-7">
+							<label class="fs-6 fw-semibold mb-2" for="birthDate">Ngày sinh:</label>
+							<input class="form-control form-control-solid" type="date" id="birthDate" name="birthDate" required>
+						</div>
+						<button type="submit" class="btn btn-primary">Lưu</button>
+					</form>
+
+				</div>
+				<!--end::Search-->
+			</div>
+			<!--end::Form-->
+		</div>
 		<!--begin::Container-->
 		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
 			<!--begin::Form-->
 			<div class="d-flex flex-center flex-column flex-lg-row-fluid">
 				<!--begin::Ticket-->
 				<div class="w-lg-500px p-10">
-					<div th:each="route : ${routes}">
-						<p th:text="${route.name}">asd</p>
-					</div>
-					<form method="post" action="/userpassenger">
-						<div class="form-group">
-							<label for="personId">Số CMND:</label>
-							<input type="text" id="personId" name="personId" required>
-						</div>
-						<div class="form-group">
-							<label for="lname">Họ:</label>
-							<input type="text" id="lname" name="lname" required>
-						</div>
-						<div class="form-group">
-							<label for="fname">Tên:</label>
-							<input type="text" id="fname" name="fname" required>
-						</div>
-						<div class="form-group">
-							<label for="email">Email:</label>
-							<input type="email" id="email" name="email" required>
-						</div>
-						<div class="form-group">
-							<label for="phone">Số điện thoại:</label>
-							<input type="text" id="phone" name="phone" required>
-						</div>
-						<div class="form-group">
-							<label for="birthDate">Ngày sinh:</label>
-							<input type="date" id="birthDate" name="birthDate" required>
-						</div>
-						<button type="submit">Lưu</button>
-					</form>
+					
 				</div>
 				<!--end::Ticket-->
 			</div>

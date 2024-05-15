@@ -7,5 +7,5 @@ import com.example.WebBanVe.entity.Passenger;
 
 @Repository
 public interface PassengerRepository extends JpaRepository<Passenger, Long>{
-
+    Passenger findTopByOrderByIdDesc();
 }

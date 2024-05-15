@@ -56,7 +56,7 @@ public class PayController {
 	}
 
 	@GetMapping("check-payment")
-	public String getCheck(HttpServletRequest request, ModelMap model) {
+	public String getCheck(HttpServletRequest request, @RequestParam Long ticket_id, ModelMap model) {
 		try {
 			// Get user_id từ cookie và thêm nó vào attribute
 			Long id = 0L;
@@ -66,12 +66,17 @@ public class PayController {
 			}
 			new Order();
 			Order order = Order.builder().customer(cusService.getOne(id)).orderDate(LocalDateTime.now())
-					.totalPrice(ticService.getOne(Long.parseLong(request.getParameter("ticket_id"))).getPrice())
+					.totalPrice(ticService.getOne(ticket_id).getPrice())
 					.status(eOrderStatus.UNPAID)
-					.passenger(pasService.getOne(Long.parseLong(request.getParameter("ticket_id"))))
-					.ticket(ticService.getOne(Long.parseLong(request.getParameter("ticket_id")))).build();
+					.passenger(pasService.getLast())
+					.ticket(ticService.getOne(ticket_id)).build();
 			if (service.insert(order)) {
-				return "redirect:pay?order_id="+service.getByTicketId(order.getTicket().getId()).getId();
+				try {
+					return "redirect:pay?order_id="+service.getByTicketId(order.getTicket().getId()).getId();
+				}
+				catch(Exception e) {
+					return "web/views/soldout";
+				}
 			} else {
 				return "web/views/404";
 			}

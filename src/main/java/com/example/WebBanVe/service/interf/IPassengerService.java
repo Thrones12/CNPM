@@ -20,4 +20,6 @@ public interface IPassengerService {
 	List<Passenger> getNotInOrder(Long id);
 
 	List<Passenger> getNotInOrder();
+
+	Passenger getLast();
 }

@@ -113,4 +113,8 @@ public class PassengerService implements IPassengerService {
 	
 		    return passengersNotInOrder;	
 	}
+	@Override
+	public Passenger getLast() {
+		return repo.findTopByOrderByIdDesc();
+	}
  }

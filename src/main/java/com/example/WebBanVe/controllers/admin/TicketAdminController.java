@@ -43,10 +43,13 @@ public class TicketAdminController {
 	}
 
 	@GetMapping("/update-ticket/{id}")
-	public String updateTicket(Model model, @PathVariable("id") Long id) {
+	public String updateTicket(Model model, @PathVariable("id") Long id,@ModelAttribute("thongbao") String tb) {
 		model.addAttribute("pageName", "ticket");
 		model.addAttribute("routes", routeService.getAll());
 		model.addAttribute("transports", transportService.getAll());
+		if (!tb.isEmpty()) {
+	        model.addAttribute("thongbao", tb);
+	    }
 		Ticket ticket = ticketService.getOne(id);
 		model.addAttribute("ticket", ticket);
 		return "admin/views/ticket/updateTicket";
@@ -64,19 +67,23 @@ public class TicketAdminController {
 	}
 
 	@GetMapping("/delete-ticket/{id}")
-	public String deleteTicket(@ModelAttribute("id") Long id, Model model) {
+	public String deleteTicket(@ModelAttribute("id") Long id, Model model, RedirectAttributes redirectAttributes) {
 		model.addAttribute("pageName", "ticket");
 		if (ticketService.delete(id)) {
+			redirectAttributes.addFlashAttribute("thongbao", "Xoa thanh cong!");
 			return "redirect:/admin/ticket";
 		}
-
+		redirectAttributes.addFlashAttribute("thongbao", "vé không hợp lệ!");
 		return "redirect:/admin/ticket";
 	}
 
 	@GetMapping("/create-ticket")
-	public String addTicket(Model model) {
+	public String addTicket(Model model, @ModelAttribute("thongbao") String tb) {
 		model.addAttribute("pageName", "ticket");
 		Ticket ticket = new Ticket();
+		if (!tb.isEmpty()) {
+	        model.addAttribute("thongbao", tb);
+	    }
 		model.addAttribute("routes", routeService.getAll());
 		model.addAttribute("transports", transportService.getAll());
 		model.addAttribute("ticket", ticket);
@@ -91,7 +98,7 @@ public class TicketAdminController {
 			redirectAttributes.addFlashAttribute("thongbao", "Vé được thêm thành công!");
 			return "redirect:/admin/ticket";
 		}
-
+		redirectAttributes.addFlashAttribute("thongbao", "vé không hợp lệ!");
 		return "redirect:/admin/createTicket";
 	}
 }

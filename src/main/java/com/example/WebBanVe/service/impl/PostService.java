@@ -59,5 +59,9 @@ public class PostService implements IPostService{
 			return false;
 		}
 	}
+	
+	@Override
+	public List<Post> getAll(Long location_id){
+		return repo.findAllByLocationId(location_id);	}
 
 }

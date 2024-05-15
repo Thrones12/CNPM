@@ -24,7 +24,7 @@ public class CustomerAdminController {
 	@Autowired
 	private ICustomerService cusService;
 
-	@GetMapping("admin/customer")
+	@GetMapping("admin/customer/list")
 	public String getCustomer(ModelMap model) {
 		model.addAttribute("pageName", "customer");
 		List<Customer> customers = cusService.getAll();

@@ -1,5 +1,7 @@
-package com.example.WebBanVe.controllers.user;
+package com.example.WebBanVe.controllers.web;
 
+
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.WebBanVe.Utils.CookieManager;
+import com.example.WebBanVe.Utils.DateTimeConverter;
 import com.example.WebBanVe.entity.Passenger;
 import com.example.WebBanVe.entity.Ticket;
 import com.example.WebBanVe.service.interf.ICustomerService;
@@ -56,6 +59,12 @@ public class UserPassengerController {
         if (ticket != null && passengerService.insert(passenger)) {
             model.addAttribute("passenger", passenger);   
             model.addAttribute("ticket", ticket);  
+            LocalDateTime date = ticket.getRoute().getDepartureTime();
+			model.addAttribute("departure_date", DateTimeConverter.convertLocalDateTimeToDateString(date));
+			model.addAttribute("departure_time", DateTimeConverter.convertLocalDateTimeToTimeString(date));
+			model.addAttribute("arrival_time", DateTimeConverter.convertLocalDateTimeToTimeString(
+					DateTimeConverter.addLocalTimeToLocalDateTime(date, ticket.getRoute().getDuration())));
+			
             return "web/views/userOrder";
         }
         return "redirect:/userpassenger?ticket_id=" + ticket.getId();

@@ -1,96 +1,126 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layouts/layout-admin.html}">
+    layout:decorate="~{layouts/layout-admin.html}">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Ticket</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        .form-container {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
         }
-        .container {
-            width: 50%;
+        .form-box {
+            border: 1px solid #ccc;
             padding: 20px;
-            border: 1px solid #ccc;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
         }
-        .title {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
+        .form-box label {
+            font-size: 1.2em;
             margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+            text-align: right;
+            display: block;
+            padding-right: 10px;
         }
-        button {
-            width: 100%;
-            background-color: #4CAF50;
-            color: white;
+        .form-box input, .form-box select, .form-box textarea {
+            width: calc(100% - 160px);
+            padding: 8px;
+            margin-top: 5px;
+            margin-left: auto;
+        }
+        .form-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .form-box button {
             padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
+            font-size: 1.2em;
             cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
+            width: 100%;
+            box-sizing: border-box;
         }
     </style>
 </head>
-<body>
-    <div class="container" layout:fragment="content">
-        <h1 class="title">Create Ticket</h1>
-        
-        <form role="form" method="post" th:action="@{/admin/create-ticket}" th:object="${ticket}">
-            
-            <label for="price">Price:</label>
-            <input type="text" id="price" name="price" th:field="*{price}">
-            
-            <label for="route">Route:</label>
-            <select id="route" name="route" th:field="*{route}">
-                <option th:each="x : ${routes}" th:value="${x.id}" th:text="${x.name}"></option>
-            </select>
-            
-            <label for="transport">Transport:</label>
-            <select id="transport" name="transport" th:field="*{transport}">
-                <option th:each="x : ${transports}" th:value="${x.id}" th:text="${x.name}"></option>
-            </select>
-            
-            <label for="ticketClass">Ticket Class:</label>
-            <select id="ticketClass" name="ticketClass" th:field="*{ticketClass}">
-                <option value="ECONOMY">Economy</option>
-                <option value="BUSINESS">Business</option>
-                <option value="FIRST">First</option>
-            </select>
-            
-            <label for="reservationCode">Reservation Code:</label>
-            <input type="text" id="reservationCode" name="reservationCode" th:field="*{reservationCode}">
-            
-            <label for="status">Status:</label>
-            <select id="status" name="status" th:field="*{status}">
-                <option value="ACTIVE">Active</option>
-                <option value="EXPIRED">Expired</option>
-                <option value="USED">Used</option>
-                <option value="BOOKED">Booked</option>
-            </select>
-            
-            <button type="submit">Create Ticket</button>
-        </form>
-    </div>
 
+<body>
+    <div layout:fragment="content">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+            <!--begin::Post-->
+            <div class="content flex-row-fluid form-container" id="kt_content">
+                <!--begin::Form for Updating Ticket-->
+                <div class="form-box">
+                    <div class="modal-header" id="kt_modal_add_customer_header">
+                        <!--begin::Modal title-->
+                        	<div th:if="${not #strings.isEmpty(thongbao)}" style="margin-top: 10px; text-align: center;">
+    <div style="background-color: #4CAF50; color: white; padding: 5px 10px; border-radius: 4px; margin: 0 10px;">
+        <p th:text="${thongbao}" style="margin: 0;"></p>
+    </div>
+</div>
+			
+                        <h2 class="fw-bold">Cập nhật vé</h2>
+                        <!--end::Modal title-->
+                    </div>
+                    <form role="form" method="post" th:action="@{/admin/create-ticket}" th:object="${ticket}">
+                        <input type="hidden" id="id" name="id" th:value="${ticket.id}">
+
+                        <div class="form-row">
+                            <label class="required fs-6 fw-semibold mb-2" for="price">Price:</label>
+                            <textarea class="form-control form-control-solid" id="price" rows="3" th:field="*{price}"></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="required fs-6 fw-semibold mb-2" for="route">Route:</label>
+                            <select id="route.id" name="route.id" th:field="*{route.id}">
+                                <option th:each="x : ${routes}" th:value="${x.id}" th:text="${x.name}"></option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="required fs-6 fw-semibold mb-2" for="transport">Transport:</label>
+                            <select id="transport.id" name="transport.id" th:field="*{transport.id}">
+                                <option th:each="x : ${transports}" th:value="${x.id}" th:text="${x.name}"></option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="required fs-6 fw-semibold mb-2" for="ticketClass">Ticket Class:</label>
+                            <select class="form-control form-control-solid" id="ticketClass" name="ticketClass" th:field="*{ticketClass}">
+                                <option value="ECONOMY">Economy</option>
+                                <option value="BUSINESS">Business</option>
+                                <option value="FIRST">First</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="required fs-6 fw-semibold mb-2" for="reservationCode">Reservation Code:</label>
+                            <textarea class="form-control form-control-solid" id="reservationCode" rows="3" th:field="*{reservationCode}"></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="required fs-6 fw-semibold mb-2" for="status">Status:</label>
+                            <select class="form-control form-control-solid" id="status" name="status" th:field="*{status}">
+                                <option value="ACTIVE">Active</option>
+                                <option value="EXPIRED">Expired</option>
+                                <option value="USED">Used</option>
+                                <option value="BOOKED">Booked</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <span class="indicator-label">Xác Nhận</span>
+                        </button>
+                    </form>
+                </div>
+                <!--end::Form for Updating Ticket-->
+            </div>
+            <!--end::Post-->
+        </div>
+        <!--end::Container-->
+    </div>
 </body>
+
 </html>

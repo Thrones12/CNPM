@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.WebBanVe.Enumeration.eGender;
 import com.example.WebBanVe.Enumeration.eOrderStatus;
 import com.example.WebBanVe.Enumeration.eTicketStatus;
 import com.example.WebBanVe.Utils.CookieManager;
@@ -42,7 +44,8 @@ public class CustomerController {
 			String cus_id = CookieManager.getCookieValue(request, "user_id");
 			if (cus_id != null) {
 				Long id = Long.parseLong(cus_id);
-				model.addAttribute("user", cusService.getOne(id));
+				Customer customer = cusService.getOne(id);
+				model.addAttribute("user", customer);
 			}
 			return "web/views/customer/profile";
 		} catch (Exception e) {

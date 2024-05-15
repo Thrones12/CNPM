@@ -66,49 +66,65 @@ public class LoginController {
 	@PostMapping("login")
 	public String postLogin(HttpServletRequest request, HttpServletResponse response, @RequestParam String username,
 			@RequestParam String password, ModelMap model) {
-		Account account = accService.getOne(username);
-		model.addAttribute("user_id", CookieManager.getCookieValue(request, "user_id"));
-		if (account == null) {
-			model.addAttribute("message", "Tài khoản không tồn tại!");
+		try {
+			Account account = accService.getOne(username);
+			model.addAttribute("user_id", CookieManager.getCookieValue(request, "user_id"));
+			if (account == null) {
+				model.addAttribute("error", "Tài khoản không tồn tại!");
+				return "web/views/login/login";
+			}
+
+			if (account.getPassword().equals(password)) {
+				Cookie cookie = new Cookie("user_id", userService.getByAccountUsername(username).getId().toString());
+				cookie.setMaxAge(3600);
+				response.addCookie(cookie);
+				if (account.getRole() == eRole.CUSTOMER)
+					return "redirect:home";
+				else if (account.getRole() == eRole.ADMIN)
+					return "redirect:admin/customer/list";
+			}
+
+			model.addAttribute("error", "Sai mật khẩu!");
 			return "web/views/login/login";
 		}
-
-		if (account.getPassword().equals(password)) {
-			Cookie cookie = new Cookie("user_id", userService.getByAccountUsername(username).getId().toString());
-			cookie.setMaxAge(3600);
-			response.addCookie(cookie);
-			if (account.getRole() == eRole.CUSTOMER)
-				return "redirect:home";
-			else if (account.getRole() == eRole.ADMIN)
-				return "redirect:admin/customer";
+		catch(Exception e) {
+			e.printStackTrace();
+			return "web/views/404";
 		}
-
-		model.addAttribute("message", "Sai mật khẩu!");
-		return "web/views/login/login";
 	}
 
 	@PostMapping("register")
 	public String postRegister(HttpServletResponse response, @RequestParam String username, @RequestParam String email,
 			@RequestParam String password, @RequestParam String confirmPassword, ModelMap model) {
-		String message = AccountValidatorManager.getInstance().validate(cusService,
-				new String[] { username, email, password, confirmPassword });
-		if (message != null) {
-			model.addAttribute("message", message);
-			return "web/views/login/register";
-		} else {
-			if (accService.register(username, confirmPassword, email)) {
-
-				Cookie cookie = new Cookie("otp", Email.sendOTP(email));
-				cookie.setMaxAge(3600);
-				response.addCookie(cookie);
-				cookie = new Cookie("username", username);
-				response.addCookie(cookie);
-
-				return "web/views/login/vertify";
-			} else {
-				model.addAttribute("message", "Đăng ký thất bại!");
+		
+		try {
+			// Kiểm tra dữ liệu
+			String message = AccountValidatorManager.getInstance().validate(cusService,
+					new String[] { username, email, password, confirmPassword });
+			
+			if (message != null) { // message == null --> success
+				model.addAttribute("message", message);
 				return "web/views/login/register";
+			} else {
+				if (accService.register(username, confirmPassword, Email.sendOTP(email))) {
+					// Thêm cookie otp để vertify
+					Cookie cookie = new Cookie("otp", Email.sendOTP(email));
+					cookie.setMaxAge(3600);
+					response.addCookie(cookie);
+					// Thêm cookie username để getAccount và set status
+					cookie = new Cookie("username", username);
+					response.addCookie(cookie);
+
+					return "web/views/login/vertify";
+				} else {
+					model.addAttribute("message", "Đăng ký thất bại!");
+					return "web/views/login/register";
+				}
 			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return "web/views/404";
 		}
 	}
 
@@ -131,14 +147,20 @@ public class LoginController {
 
 	@PostMapping("vertify")
 	public String postVertify(HttpServletRequest request, @RequestParam String otp, ModelMap model) {
-		if (otp.equals(CookieManager.getCookieValue(request, "otp"))) {
-			System.out.println("success");
-			Account account = accService.getOne(CookieManager.getCookieValue(request, "username").toString());
-			account.setStatus(eAccountStatus.ACTIVED);
-			accService.update(account);
-			return "web/views/login/login";
+		try {
+			if (otp.equals(CookieManager.getCookieValue(request, "otp"))) {
+				Account account = accService.getOne(CookieManager.getCookieValue(request, "username").toString());
+				account.setStatus(eAccountStatus.ACTIVED);
+				accService.update(account);
+				model.addAttribute("message", "Đăng ký tài khoản thành công!");
+				return "web/views/login/login";
+			}
+			model.addAttribute("error", "Nhập sai OTP!");
+			return "web/views/login/vertify";
 		}
-		model.addAttribute("message", "Nhập sai OTP!");
-		return "web/views/login/vertify";
+		catch(Exception e) {
+			e.printStackTrace();
+			return "web/views/404";
+		}
 	}
 }

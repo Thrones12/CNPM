@@ -83,7 +83,8 @@ public class PlaneController {
 				// Object[]: {route_id, transport_id, route_name, transport_name}
 				List<Object[]> objects = routeService.search(departure_id, arrival_id, departure_time,
 						eTransportType.PLANE, tcSelected);
-				System.out.println(tcSelected);
+				
+				
 				// Chuyển objects thành đối tượng phù hợp để đưa lên views
 				// results: {transport_name, route_name, departure_name, arrival_name}
 				List<Object[]> results = new ArrayList<>();

@@ -49,7 +49,7 @@ public class User {
 	private String phone;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="address")
+	@JoinColumn(name="location_id")
 	private Location location;
 
 	@Column(name="gender")
