@@ -15,7 +15,7 @@ public interface RouteRepository extends JpaRepository<Route, Long> {
 
 	List<Route> findByDepartureIdAndArrivalIdAndDepartureTime(Long departureId, Long arrivalId,
 			LocalDate departureTime);
-	
-	@Procedure(name="searchTicket")
-	List<Object[]> searchTicket(Long departure_id, Long arrival_id, LocalDate departure_time, String type);
+
+	@Procedure(name = "searchTicket")
+	List<Object[]> searchTicket(Long departure_id, Long arrival_id, LocalDate departure_time, String type, String tcSelected);
 }

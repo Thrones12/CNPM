@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout-web.html}">
+
+<body>
+	<div layout:fragment="content">
+		
+		<!--begin::Container-->
+		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+			<!--begin::Form-->
+			<div class="d-flex flex-center flex-column flex-lg-row-fluid">
+				<!--begin::Search-->
+				<div class="w-lg-800px p-10">
+					<!--begin::Title-->
+					<h1 class="text-gray-900 fw-bolder mb-3">Thông Tin Hành Khách</h1>
+					<!--begin::Name-->
+					<form method="post" action="/userpassenger">
+						<div class="row g-9 mb-7">
+							<label class="fs-6 fw-semibold mb-2" for="personId">Số CMND:</label>
+							<input class="form-control form-control-solid" type="text" id="personId" name="personId" required>
+						</div>
+						<div class="row g-9 mb-7">
+							<label class="fs-6 fw-semibold mb-2" for="lname">Họ:</label>
+							<input class="form-control form-control-solid" type="text" id="lname" name="lname" required>
+						</div>
+						<div class="row g-9 mb-7">
+							<label class="fs-6 fw-semibold mb-2" for="fname">Tên:</label>
+							<input class="form-control form-control-solid" type="text" id="fname" name="fname" required>
+						</div>
+						<div class="row g-9 mb-7">
+							<label class="fs-6 fw-semibold mb-2" for="email">Email:</label>
+							<input class="form-control form-control-solid" type="email" id="email" name="email" required>
+						</div>
+						<div class="row g-9 mb-7">
+							<label class="fs-6 fw-semibold mb-2" for="phone">Số điện thoại:</label>
+							<input class="form-control form-control-solid" type="text" id="phone" name="phone" required>
+						</div>
+						<div class="row g-9 mb-7">
+							<label class="fs-6 fw-semibold mb-2" for="birthDate">Ngày sinh:</label>
+							<input class="form-control form-control-solid" type="date" id="birthDate" name="birthDate" required>
+						</div>
+						<button type="submit" class="btn btn-primary">Lưu</button>
+					</form>
+
+				</div>
+				<!--end::Search-->
+			</div>
+			<!--end::Form-->
+		</div>
+		<!--begin::Container-->
+		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+			<!--begin::Form-->
+			<div class="d-flex flex-center flex-column flex-lg-row-fluid">
+				<!--begin::Ticket-->
+				<div class="w-lg-500px p-10">
+					
+				</div>
+				<!--end::Ticket-->
+			</div>
+			<!--end::Form-->
+		</div>
+	</div>
+</body>
+
+</html>

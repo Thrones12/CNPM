@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout-admin.html}">
 <head>
     <meta charset="UTF-8">
     <title>Chỉnh sửa Station</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container mt-5" layout:fragment="content">
         <h1 class="mb-4">Chỉnh sửa Station</h1>
 
         <form th:action="@{/admin/station/edit}" th:object="${station}" method="post">
@@ -22,16 +23,16 @@
             </div>
             <div class="form-group">
                 <label for="openingTime">Thời gian mở cửa</label>
-                <input type="datetime-local" class="form-control" id="openingTime" th:field="*{openingTime}" required>
+                <input type="text" class="form-control" id="openingTime" th:field="*{openingTime}" required>
             </div>
             <div class="form-group">
                 <label for="closingTime">Thời gian đóng cửa</label>
-                <input type="datetime-local" class="form-control" id="closingTime" th:field="*{closingTime}" required>
+                <input type="text" class="form-control" id="closingTime" th:field="*{closingTime}" required>
             </div>
             <div class="form-group">
                 <label for="type">Loại</label>
                 <select class="form-control" id="type" th:field="*{type}">
-                    <option th:each="transportType : ${T(com.example.WebBanVe.entity.ETransportType).values()}"
+                    <option th:each="transportType : ${T(com.example.WebBanVe.Enumeration.eTransportType).values()}"
                             th:value="${transportType}"
                             th:text="${transportType.name()}">
                     </option>

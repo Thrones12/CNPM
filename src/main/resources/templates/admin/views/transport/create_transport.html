@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout-admin.html}">
 <head>
     <meta charset="UTF-8">
     <title>Tạo mới Transport</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container mt-5" layout:fragment="content">
         <h1 class="mb-4">Tạo mới Transport</h1>
         <form th:action="@{/admin/transport/create}" th:object="${transport}" method="post">
             <div class="form-group">
@@ -50,7 +51,7 @@
 			<div class="form-group">
 			    <label for="status">Trạng thái</label>
 			    <select class="form-control" id="status" th:field="*{status}">
-			        <option th:each="transportStatus : ${T(com.example.WebBanVe.entity.Transport.eTransportStatus).values()}"
+			        <option th:each="transportStatus : ${T(com.example.WebBanVe.Enumeration.eTransportStatus).values()}"
 			                th:value="${transportStatus}"
 			                th:text="${transportStatus.name()}">
 			        </option>
@@ -60,7 +61,7 @@
 			<div class="form-group">
 			    <label for="type">Loại</label>
 			    <select class="form-control" id="type" th:field="*{type}">
-			        <option th:each="transportType : ${T(com.example.WebBanVe.entity.ETransportType).values()}"
+			        <option th:each="transportType : ${T(com.example.WebBanVe.Enumeration.eTransportType).values()}"
 			                th:value="${transportType}"
 			                th:text="${transportType.name()}">
 			        </option>

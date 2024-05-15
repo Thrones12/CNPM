@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 //Phong
 @Entity
 @DiscriminatorValue("CUSTOMER")
-@Table(name="customer")
+@Table(name = "customer")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,4 +28,7 @@ public class Customer extends User {
 	@JsonIgnore
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<Post> posts;
+	@JsonIgnore
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	private List<Order> order;
 }

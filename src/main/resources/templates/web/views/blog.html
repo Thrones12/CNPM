@@ -6,42 +6,90 @@
 	<div layout:fragment="content">
 		<!--begin::Container-->
 		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
-			<!--begin::Form-->
-			<div class="d-flex flex-center flex-column flex-lg-row-fluid">
-				<!--begin::Search-->
-				<div class="w-lg-500px p-10">
-					<form method="get" th:action="@{blog}">
-						<!--begin::Heading-->
-						<div class="text-center mb-11">
-							<!--begin::Title-->
-							<h1 class="text-gray-900 fw-bolder mb-3">Blog</h1>
-							<!--end::Title-->
+			<!--begin::Post-->
+			<div class="content flex-row-fluid" id="kt_content">
+				<!--begin::Row-->
+				<div class="row g-5 g-xxl-8">
+					<!--begin::Col-->
+					<div class="col-xl-4">
+						<!--begin::Charts Widget 1-->
+						<div class="card mb-5 mb-xxl-8">
+							<!--begin::Wrapper-->
+							<div class="card-body px-6 px-lg-10 px-xxl-15 py-20">
+								<form method="get" th:action="@{blog}">
+									<!--begin::Heading-->
+									<div class="text-center mb-11">
+										<!--begin::Title-->
+										<h1 class="text-gray-900 fw-bolder mb-3">Địa Điểm</h1>
+										<!--end::Title-->
+									</div>
+									<!--begin::Heading-->
+									<!--begin::Message-->
+									<div class="fs-6 fw-semibold mb-2" style="color: red;" th:text="${message}"></div>
+									<!--end::Message-->
+									<!--begin::Input group-->
+									<div class="row mb-8">
+										<label class="required fs-6 fw-semibold mb-2">Tỉnh/Thành phố:</label>
+										<select class="form-select form-select-solid" data-control="select2"
+											id="pSelected" name="pSelected" onchange="onProvinceChange()">
+											<option th:each="province : ${provinces}"
+												th:selected="${province == pSelected}" th:value="${province}"
+												th:text="${province}"></option>
+										</select>
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Input group-->
+									<div class="row mb-8">
+										<label class="required fs-6 fw-semibold mb-2">Quận/Huyện:</label>
+										<select class="form-select form-select-solid" data-control="select2"
+											id="dSelected" name="dSelected" onchange="onDistrictChange()">
+											<option th:each="district : ${districts}"
+												th:selected="${district == dSelected}" th:value="${district}"
+												th:text="${district}"></option>
+										</select>
+									</div>
+									<!--end::Input group-->
+
+									<!--begin::Input group-->
+									<div class="row mb-8">
+										<label class="required fs-6 fw-semibold mb-2">Phường/Xã:</label>
+										<select class="form-select form-select-solid" data-control="select2"
+											id="wSelected" name="wSelected">
+											<option th:each="ward : ${wards}" th:selected="${ward == wSelected}"
+												th:value="${ward}" th:text="${ward}"></option>
+										</select>
+									</div>
+									<!--end::Input group-->
+
+									<div class="col-md-4 fv-row" style="margin-bottom: 15px;">
+										<input type="submit" class="btn btn-primary" value="Tiến Hành Tìm Kiếm">
+									</div>
+								</form>
+							</div>
 						</div>
-						<!--begin::Heading-->
-						<select id="pSelected" name="pSelected" onchange="onProvinceChange()">
-            				<option th:each="province : ${provinces}" th:selected="${province == pSelected}" th:value="${province}" th:text="${province}"></option>
-						</select>
-						<select id="dSelected" name="dSelected" onchange="onDistrictChange()">
-            				<option th:each="district : ${districts}" th:selected="${province == pSelected}" th:value="${district}" th:text="${district}"></option>
-						</select>
-						<select id="wSelected" name="wSelected">
-            				<option th:each="ward : ${wards}" th:selected="${province == pSelected}" th:value="${ward}" th:text="${ward}"></option>
-						</select>
-						<input type="submit" value="Tim Kiếm">
-					</form>
-				</div>
-				<!--end::Search-->
-				<!--begin::Ticket-->
-				<div class="w-lg-500px p-10">
-					<div th:each="location : ${locations}">
-						<a th:href="'location?id='+${location.id}" th:text="${location.name}"></a>
-						
+						<!--end::Charts Widget 1-->
 					</div>
+					<!--end::Col-->
+					<!--begin::Col-->
+					<div class="col-xl-8">
+						<!--begin::Feeds Widget 1-->
+						<div th:each="location : ${locations}" class="card mb-5 mb-xxl-8">
+							<!--begin::Body-->
+							<a th:href="'post?location_id='+${location.id}">
+								<h2 class="card-body pb-0" th:text="${location.name}"></h2>
+							</a>
+							<!--end::Body-->
+						</div>
+						<!--end::Feeds Widget 1-->
+					</div>
+					<!--end::Col-->
 				</div>
-				<!--end::Ticket-->
+				<!--end::Row-->
 			</div>
-			<!--end::Form-->
+			<!--end::Post-->
 		</div>
+		<!--end::Container-->
 	</div>
 </body>
 

@@ -18,4 +18,6 @@ public interface IPostService {
 
 	boolean delete(Long id);
 
+	List<Post> getAll(Long location_id);
+
 }

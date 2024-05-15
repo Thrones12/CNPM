@@ -94,15 +94,30 @@
 								<!--end::Header-->
 								<div class="separator"></div>
 
-								<!--begin::Header-->
-								<div th:if="${order.status!=null}" class="d-flex align-items-center">
+								<div th:if="${order.status.name() == 'PAID'}" class="d-flex align-items-center">
 									<!--begin::User-->
 									<div class="d-flex align-items-center flex-grow-1">
 										<!--begin::Info-->
-										<a th:href="order-detail">Chi tiết</a>
+										<a th:href="'order-detail?order_id='+${order.id}" >Chi tiết</a>
 										<!--end::Info-->
 									</div>
 									<!--end::User-->
+								</div>
+								<!--end::Header-->
+								<!--begin::Header-->
+								<div th:if="${order.status.name() == 'UNPAID'}" class="d-flex align-items-center">
+									<!--begin::User-->
+									<div class="d-flex align-items-center flex-grow-1">
+										<!--begin::Info-->
+										<a th:href="'pay?order_id='+${order.id}">Thanh Toán</a>
+										<!--end::Info-->
+									</div>
+									<!--end::User-->
+									<!--begin::Menu-->
+									<div class="my-0">
+										<a th:href="'order-refund?id='+${order.id}" style="color:red">Hủy</a>
+									</div>
+									<!--end::Menu-->
 								</div>
 								<!--end::Header-->
 							</div>

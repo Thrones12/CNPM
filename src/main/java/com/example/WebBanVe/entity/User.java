@@ -18,6 +18,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -47,8 +48,9 @@ public class User {
 	@Column(name="phone")
 	private String phone;
 
-	@Column(name="address")
-	private String address;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="location_id")
+	private Location location;
 
 	@Column(name="gender")
 	@Enumerated(EnumType.STRING)
@@ -56,7 +58,7 @@ public class User {
 
 	@Column(name="birthdate")
 	private Date birthdate;
-
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="account_id", referencedColumnName = "id")
 	private Account account;

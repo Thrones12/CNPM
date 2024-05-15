@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout-admin.html}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Monthly Revenue</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+
+<body>
+	<div layout:fragment="content">
+
+		<!--begin::Container-->
+		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+			<!--begin::Post-->
+			<div class="content flex-row-fluid" id="kt_content">
+				<!--begin::Card-->
+				<div class="card">
+					<!--begin::Card header-->
+					<div class="card-header border-0 pt-6">
+						<div class="container mt-4">
+							<label for="yearSelect">Select Year:</label>
+							<select id="yearSelect" name="yearSelect" onchange="updateChart()">
+								<option value=""></option>
+								<option th:each="year : ${years}" th:text="${year}" th:value="${year}"></option>
+							</select>
+
+							<canvas id="revenueChart"></canvas>
+							<script th:inline="javascript">
+								/*<![CDATA[*/
+								function updateChart() {
+									var selectedYear = document.getElementById('yearSelect').value;
+									window.location.href = '/admin/revenue?year=' + selectedYear;
+								}
+
+								document.addEventListener('DOMContentLoaded', function () {
+									var monthlyRevenue = /*[[${monthlyRevenue}]]*/ {};
+
+									var labels = Object.keys(monthlyRevenue);
+									var data = Object.values(monthlyRevenue);
+
+									var ctx = document.getElementById('revenueChart').getContext('2d');
+									var myChart = new Chart(ctx, {
+										type: 'bar',
+										data: {
+											labels: labels,
+											datasets: [{
+												label: 'Doanh thu tháng',
+												data: data,
+												backgroundColor: 'green',
+												borderColor: 'rgba(33,164,222,0.6)',
+												borderWidth: 1
+											}]
+										},
+										options: {
+											scales: {
+												x: {
+													title: {
+														display: true,
+														text: 'Month'
+													}
+												},
+												y: {
+													beginAtZero: true,
+													title: {
+														display: true,
+														text: 'Revenue ($)'
+													}
+												}
+											}
+										}
+									});
+								});
+            /*]]>*/
+							</script>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+
+</html>

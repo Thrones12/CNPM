@@ -11,7 +11,7 @@ import com.example.WebBanVe.entity.Route;
 public interface IRouteService {
 	List<Route> getAll();
 	
-	List<Object[]> search(Long departure_id, Long arrival_id, String start, eTransportType eType);
+	List<Object[]> search(Long departure_id, Long arrival_id, String start, eTransportType eType, String tcSelected);
 
 	Route getOne(Long id);
 

@@ -24,6 +24,7 @@ public class StationController
 	@GetMapping("/station")
 	public String getAll(Model model) 
 	{		
+		model.addAttribute("pageName", "station");
 	    List<Station> STATION = service.getAll();
 	    model.addAttribute("STATION", STATION);
 	    return "admin/views/station/stations";
@@ -31,39 +32,45 @@ public class StationController
 
 	@GetMapping("/station/{id}")
     public String getOne(@PathVariable Long id, Model model) {
+		model.addAttribute("pageName", "station");
         Station station = service.getOne(id);
         model.addAttribute("station", station);
-        return "admin/station_detail";
+        return "admin/views/station/station_detail";
     }
 
     @GetMapping("/station/create")
     public String createStationForm(Model model) {
+		model.addAttribute("pageName", "station");
         model.addAttribute("station", new Station());
-        return "admin/create_station";
+        return "admin/views/station/create_station";
     }
 
     @PostMapping("/station/create")
     public String insert(@ModelAttribute Station station, Model model)	// nhận @ModelAttribute Station station từ form.
     {	
+		model.addAttribute("pageName", "station");
         service.insert(station);
         return "redirect:/admin/station";
     }
 
     @GetMapping("/station/edit/{id}")
     public String editStationForm(@PathVariable Long id, Model model) {
+		model.addAttribute("pageName", "station");
         Station station = service.getOne(id);
         model.addAttribute("station", station);
-        return "admin/edit_station";
+        return "admin/views/station/edit_station";
     }
 
     @PostMapping("/station/edit")
     public String update(@ModelAttribute Station station, Model model) {
+		model.addAttribute("pageName", "station");
         service.update(station);
         return "redirect:/admin/station";
     }
 
     @GetMapping("/station/delete/{id}")
     public String delete(@PathVariable Long id, Model model) {
+		model.addAttribute("pageName", "station");
         service.delete(id);
         return "redirect:/admin/station";
     }

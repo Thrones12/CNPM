@@ -1,5 +1,6 @@
 package com.example.WebBanVe.entity;
 
+import com.example.WebBanVe.Enumeration.eTransportStatus;
 import com.example.WebBanVe.Enumeration.eTransportType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -46,8 +47,4 @@ public class Transport
 	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
 	private eTransportStatus status;
-	
-	public enum eTransportStatus {
-		STOPWORKING, MAINTENANCE, PREPARETODEPART, MOVING
-	}
 }

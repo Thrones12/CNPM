@@ -19,6 +19,11 @@ public class LocationService implements ILocationService {
         return locationRepo.findAll();
     }
 
+	@Override
+	public List<Location> findAllByNameNotNull() {
+		return locationRepo.findAllByNameNotNull();
+	}
+
     @Override
     public List<Location> search(String province, String district, String ward) {
         return locationRepo.findLocationsByProvinceDistrictAndWard(province, district, ward);

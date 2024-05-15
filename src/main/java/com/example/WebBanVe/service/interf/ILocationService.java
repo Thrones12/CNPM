@@ -11,7 +11,9 @@ public interface ILocationService {
 	List<Location> getAll();
 
 	List<Location> search(String province, String district, String ward);
-
+	
+	List<Location> findAllByNameNotNull();
+	
 	Location getOne(Long id);
 
 	boolean insert(Location location);

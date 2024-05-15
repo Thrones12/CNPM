@@ -26,6 +26,7 @@ public class CustomerAdminController {
 
 	@GetMapping("admin/customer/list")
 	public String getCustomer(ModelMap model) {
+		model.addAttribute("pageName", "customer");
 		List<Customer> customers = cusService.getAll();
 		model.addAttribute("customers", customers);
 		return "admin/views/customer/list";
@@ -33,12 +34,14 @@ public class CustomerAdminController {
 
 	@GetMapping("admin/customer/insert")
 	public String getInsertCustomer(ModelMap model) {
+		model.addAttribute("pageName", "customer");
 		model.addAttribute("customer", new Customer());
 		return "admin/views/customer/add";
 	}
 
 	@PostMapping("admin/customer/insert")
 	public String postCustomer(@ModelAttribute("customer") Customer customer, ModelMap model) {
+		model.addAttribute("pageName", "customer");
 		if (cusService.insert(customer)) {
 			return "redirect:list";
 		}
@@ -48,6 +51,7 @@ public class CustomerAdminController {
 
 	@GetMapping("admin/customer/update")
 	public String getDetailCustomer(@RequestParam Long id, ModelMap model) {
+		model.addAttribute("pageName", "customer");
 		Customer customer = cusService.getOne(id);
 		model.addAttribute("customer", customer);
 		return "admin/views/customer/update";
@@ -55,6 +59,7 @@ public class CustomerAdminController {
 
 	@PostMapping("admin/customer/update")
 	public String putCustomer(@ModelAttribute("customer") Customer customer, ModelMap model) {
+		model.addAttribute("pageName", "customer");
 		if (cusService.update(customer)) {
 			return "redirect:list";
 		}
@@ -64,6 +69,7 @@ public class CustomerAdminController {
 
 	@GetMapping("admin/customer/delete")
 	public String deleteCustomer(@RequestParam Long id, ModelMap model) {
+		model.addAttribute("pageName", "customer");
 		if (cusService.delete(id)) {
 			return "redirect:list";
 		}

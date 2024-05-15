@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout-admin.html}">
 <head>
     <meta charset="UTF-8">
     <title>Danh sách các station</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container mt-5" layout:fragment="content">
         <h1 class="mb-4">Danh sách các station</h1>
         
         <a th:href="@{/admin/station/create}" class="btn btn-primary mb-3">Tạo mới</a>
@@ -27,8 +28,8 @@
 			        <td th:text="${station.id}"></td>
 			        <td th:text="${station.name}"></td>
 			        <td th:text="${station.location}"></td>
-			        <td th:text="${#temporals.format(station.openingTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                    <td th:text="${#temporals.format(station.closingTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+			        <td th:text="${station.openingTime}"></td>
+                    <td th:text="${station.closingTime}"></td>
 			        <td th:text="${station.type}"></td>
 			        <td>
 			            <a th:href="@{/admin/station/{id}(id=${station.id})}" class="btn btn-primary btn-sm">Xem</a>

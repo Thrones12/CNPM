@@ -21,13 +21,19 @@ public class TicketController {
 
 	@GetMapping("ticket")
 	public String getTicket(@RequestParam Long route_id, @RequestParam Long transport_id, ModelMap model) {
-		Ticket ticket = service.getOne(route_id, transport_id);
-		LocalDateTime date = ticket.getRoute().getDepartureTime();
-		model.addAttribute("ticket", ticket);
-		model.addAttribute("departure_date", DateTimeConverter.convertLocalDateTimeToDateString(date));
-		model.addAttribute("departure_time", DateTimeConverter.convertLocalDateTimeToTimeString(date));
-		model.addAttribute("arrival_time", DateTimeConverter.convertLocalDateTimeToTimeString(
-				DateTimeConverter.addLocalTimeToLocalDateTime(date, ticket.getRoute().getDuration())));
-		return "web/views/ticket";
+		try {
+			Ticket ticket = service.getOne(route_id, transport_id);
+			LocalDateTime date = ticket.getRoute().getDepartureTime();
+			model.addAttribute("ticket", ticket);
+			model.addAttribute("departure_date", DateTimeConverter.convertLocalDateTimeToDateString(date));
+			model.addAttribute("departure_time", DateTimeConverter.convertLocalDateTimeToTimeString(date));
+			model.addAttribute("arrival_time", DateTimeConverter.convertLocalDateTimeToTimeString(
+					DateTimeConverter.addLocalTimeToLocalDateTime(date, ticket.getRoute().getDuration())));
+			return "web/views/ticket";
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return "web/views/404";
+		}
 	}
 }

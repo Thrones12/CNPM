@@ -79,7 +79,6 @@
 							th:text="${ticket.price}" />
 					</div>
 					<!--end::Name-->
-					<form method="get" th:action="@{login}">
 						<input type="hidden" name="ticket_id" th:value="${ticket.id}">
 						<button type="submit" class="btn btn-primary">Tiến Hành Đặt Vé</button>
 					</form>

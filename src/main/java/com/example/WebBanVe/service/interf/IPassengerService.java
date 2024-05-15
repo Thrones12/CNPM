@@ -1,6 +1,5 @@
 package com.example.WebBanVe.service.interf;
 
-
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -18,4 +17,9 @@ public interface IPassengerService {
 	boolean update(Passenger passenger);
 
 	boolean delete(Long id);
+	List<Passenger> getNotInOrder(Long id);
+
+	List<Passenger> getNotInOrder();
+
+	Passenger getLast();
 }
